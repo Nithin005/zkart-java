@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+option java_package = "org.example.protos";
+option java_outer_classname = "InvoicesProtos";
+
+message Invoice {
+  optional string invoice_no = 1;
+  optional string datetime = 2;
+  optional string email = 3;
+  optional int32 total_value = 4;
+  optional int32 discounted_value = 5;
+
+  repeated Item items = 6;
+
+}
+
+message Item {
+  optional string category = 1;
+  optional string brand = 2;
+  optional string model = 3;
+  optional int32 price = 4;
+  optional int32 quantity = 5;
+}
+
+message Invoices {
+  repeated Invoice Invoices = 1;
+}
