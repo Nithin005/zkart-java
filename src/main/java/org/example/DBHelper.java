@@ -24,39 +24,28 @@ public class DBHelper {
     }
 
     private void _createTable() {
+        String createCustomerTableSql = "CREATE TABLE customer (" +
+                "customer_id INTEGER PRIMARY KEY," +
+                "email TEXT NOT NULL," +
+                "encrypted_pwd TEXT NOT NULL," +
+                "name TEXT NOT NULL," +
+                "mobile TEXT NOT NULL," +
+                "discount_code TEXT," +
+                "discount_expiry INTEGER" +
+                ");";
+        String createInventoryTableSql = "CREATE TABLE inventory (" +
+                "item_id INTEGER PRIMARY KEY," +
+                "category TEXT," +
+                "brand TEXT," +
+                "model TEXT," +
+                "price INTEGER," +
+                "stock INTEGER" +
+                ");";
         try(Statement stmt = conn.createStatement();){
-            String createCustomerTableSql = "CREATE TABLE customer (" +
-                    "email TEXT PRIMARY KEY," +
-                    "encryptedPwd TEXT," +
-                    "name TEXT," +
-                    "mobile TEXT" +
-                    ");";
-            String createInventoryTableSql = "CREATE TABLE inventory (" +
-                    "category TEXT," +
-                    "brand TEXT," +
-                    "model TEXT," +
-                    "price INTEGER," +
-                    "stock INTEGER" +
-                    ");";
-//            String createInvoiceTableSql = "CREATE TABLE invoice (" +
-//                    "email TEXT," +
-//                    "invoiceNo INTEGER," +
-//                    "date TIMESTAMP," +
-//                    "totalValue INTEGER," +
-//                    "discountedValue INTEGER" +
-//                    ");";
-            String createDiscountTableSql = "CREATE TABLE discount (" +
-                    "email TEXT PRIMARY KEY," +
-                    "code TEXT," +
-                    "expiry INTEGER" +
-                    ");";
             stmt.executeUpdate("DROP TABLE IF EXISTS customer");
             stmt.executeUpdate("DROP TABLE IF EXISTS inventory");
-            stmt.executeUpdate("DROP TABLE IF EXISTS discount");
             stmt.executeUpdate(createCustomerTableSql);
             stmt.executeUpdate(createInventoryTableSql);
-//            stmt.executeUpdate(createInvoiceTableSql);
-            stmt.executeUpdate(createDiscountTableSql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -80,15 +69,15 @@ public class DBHelper {
     public void readFromTextFile(Path customerPath, Path inventoryPath){
 
         this._createTable();
-        Modal.Customer customer;
+        Customer customer;
         List<String> lines = this._readAllLines(customerPath);
 
         for(String l: lines){
             String[] data = l.split(" ");
 //                UserName/Email EncryptedPwd Name Mobile
 //                abc@zoho.com ApipNbjm Rahul 9922992299
-            customer = new Modal.Customer(data[0], data[1], data[2], data[3]);
-            try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?)")){
+            customer = new Customer(0, data[0], data[1], data[2], data[3]);
+            try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO customer (email, encrypted_pwd, name, mobile) VALUES (?, ?, ?, ?)")){
                 stmt.setString(1, customer.getEmail());
                 stmt.setString(2, customer.getEncryptedPwd());
                 stmt.setString(3, customer.getName());
@@ -99,15 +88,15 @@ public class DBHelper {
             }
         }
 
-        Modal.Item item;
+        Item item;
         lines = this._readAllLines(inventoryPath);
 
         for(String l: lines){
             String[] data = l.split(" ");
 //            Category Brand Model Price Stock
 //            Mobile Apple 6S 60000 10
-            item = new Modal.Item(data[0], data[1], data[2], Integer.parseInt(data[3]), Integer.parseInt(data[4]));
-            try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO inventory VALUES (?, ?, ?, ?, ?)")){
+            item = new Item(0, data[0], data[1], data[2], Integer.parseInt(data[3]), Integer.parseInt(data[4]));
+            try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO inventory (category, brand, model, price, stock) VALUES (?, ?, ?, ?, ?)")){
                 stmt.setString(1, item.getCategory());
                 stmt.setString(2, item.getBrand());
                 stmt.setString(3, item.getModel());
@@ -120,13 +109,13 @@ public class DBHelper {
         }
     }
 
-    public List<Modal.Item> queryItems(String whereClause){
-        List<Modal.Item> items = new ArrayList<>();
+    public List<Item> queryItems(String whereClause){
+        List<Item> items = new ArrayList<>();
         try(Statement stmt = conn.createStatement();){
-            String sql = "SELECT * FROM inventory " + whereClause;
+            String sql = "SELECT item_id, category, brand, model, price, stock FROM inventory " + whereClause;
             ResultSet res = stmt.executeQuery(sql);
             while(res.next()){
-                items.add(new Modal.Item(res.getString(1), res.getString(2), res.getString(3), res.getInt(4), res.getInt(5)));
+                items.add(new Item(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getInt(5), res.getInt(6)));
             }
         }catch(SQLException e){
             throw new RuntimeException(e);
@@ -134,12 +123,13 @@ public class DBHelper {
         return items;
     }
 
-    public Modal.Customer getCustomer(String emailId){
-        try(Statement stmt = conn.createStatement();){
-            String sql = "SELECT * FROM customer WHERE email='"+emailId+"'";
-            ResultSet res = stmt.executeQuery(sql);
+
+    public Customer getCustomer(String emailId){
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT customer_id, email, encrypted_pwd, name, mobile FROM customer WHERE email= ?")){
+            stmt.setString(1, emailId);
+            ResultSet res = stmt.executeQuery();
             if(res.next()){
-                return new Modal.Customer(res.getString(1), res.getString(2), res.getString(3), res.getString(4));
+                return new Customer(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
             } else {
                 return null;
             }
@@ -148,8 +138,21 @@ public class DBHelper {
         }
     }
 
-    public void addCustomer(Modal.Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?)")){
+    public int getCustomerId(Customer customer){
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT customer_id FROM customer WHERE email = ?")){
+            stmt.setString(1, customer.getEmail());
+            ResultSet res = stmt.executeQuery();
+            if(res.next()){
+                return res.getInt(1);
+            }
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    public int addCustomer(Customer customer){
+        try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO customer (email, encrypted_pwd, name, mobile) VALUES (?, ?, ?, ?)")){
             stmt.setString(1, customer.getEmail());
             stmt.setString(2, customer.getEncryptedPwd());
             stmt.setString(3, customer.getName());
@@ -158,55 +161,41 @@ public class DBHelper {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return getCustomerId(customer);
     }
 
-    public void updateCustomerPwd(Modal.Customer customer, String password){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET encryptedPwd = ? WHERE email = ?")){
-            stmt.setString(1, Modal.Customer.encryptPwd(password));
-            stmt.setString(2, customer.getEmail());
+    public void updateCustomerPwd(Customer customer, String password){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET encrypted_pwd = ? WHERE customer_id = ?")){
+            stmt.setString(1, Utils.encryptPwd(password));
+            stmt.setInt(2, customer.getCustomerId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Modal.Customer> queryCustomers(String whereClause){
-        List<Modal.Customer> customers = new ArrayList<>();
-        try(Statement stmt = conn.createStatement();){
-            String sql = "SELECT * FROM customer " + whereClause;
-            ResultSet res = stmt.executeQuery(sql);
-            while(res.next()){
-                customers.add(new Modal.Customer(res.getString(1), res.getString(2), res.getString(3), res.getString(4)));
-            }
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-        return customers;
-    }
 
-    public void updateStock(Modal.Item item, int newStock){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE inventory SET stock = stock + ? WHERE category = ? AND brand = ? AND model = ?");){
+    public void updateStock(Item item, int newStock){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE inventory SET stock = stock + ? WHERE item_id = ?");){
             stmt.setInt(1, newStock);
-            stmt.setString(2, item.getCategory());
-            stmt.setString(3, item.getBrand());
-            stmt.setString(4, item.getModel());
+            stmt.setInt(2, item.getItemId());
             stmt.executeUpdate();
         } catch(SQLException e){
             throw new RuntimeException(e);
         }
     }
 
-    public String getDiscountCode(Modal.Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM discount WHERE email=?");){
-            stmt.setString(1, customer.getEmail());
+    public String getDiscountCode(Customer customer){
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT discount_code, discount_expiry FROM customer WHERE customer_id = ?");){
+            stmt.setInt(1, customer.getCustomerId());
             ResultSet res = stmt.executeQuery();
             if(res.next()){
                 // check validity
-                int expiry = res.getInt(3);
+                int expiry = res.getInt(2);
                 if(expiry<=0){
                     return null;
                 }
-                return res.getString(2);
+                return res.getString(1);
             }
             return null;
         } catch(SQLException e){
@@ -214,34 +203,32 @@ public class DBHelper {
         }
     }
 
-    public void updateDiscountCode(Modal.Customer customer, String discountCode){
-        try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO discount (email, code, expiry) VALUES (?, ?, ?) ON CONFLICT(email) DO UPDATE SET expiry=excluded.expiry;");){
-            stmt.setString(1, customer.getEmail());
-            stmt.setString(2, discountCode);
-            stmt.setInt(3, 3);
+    public void updateDiscountCode(Customer customer, String discountCode){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_code = ? WHERE customer_id = ?");){
+            stmt.setString(1, discountCode);
+            stmt.setInt(2, customer.getCustomerId());
             stmt.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
 
-    public void updateDiscountCodeExpiry(Modal.Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE discount SET expiry=expiry-1 WHERE email = ?");){
-            stmt.setString(1, customer.getEmail());
+    public void updateDiscountCodeExpiry(Customer customer){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_expiry=discount_expiry-1 WHERE customer_id = ?");){
+            stmt.setInt(1, customer.getCustomerId());
             stmt.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
 
-    public void invalidateDiscountCode(Modal.Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE discount SET expiry=0 WHERE email = ?");){
-            stmt.setString(1, customer.getEmail());
+    public void invalidateDiscountCode(Customer customer){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_expiry=0 WHERE customer_id = ?");){
+            stmt.setInt(1, customer.getCustomerId());
             stmt.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
-
 
 }

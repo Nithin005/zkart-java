@@ -4,18 +4,18 @@
 package org.example.protos;
 
 /**
- * Protobuf type {@code Item}
+ * Protobuf type {@code InvoiceItem}
  */
-public final class Item extends
+public final class InvoiceItem extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:Item)
-    ItemOrBuilder {
+    // @@protoc_insertion_point(message_implements:InvoiceItem)
+    InvoiceItemOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Item.newBuilder() to construct.
-  private Item(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use InvoiceItem.newBuilder() to construct.
+  private InvoiceItem(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Item() {
+  private InvoiceItem() {
     category_ = "";
     brand_ = "";
     model_ = "";
@@ -25,20 +25,20 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Item();
+    return new InvoiceItem();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.example.protos.InvoicesProtos.internal_static_Item_descriptor;
+    return org.example.protos.InvoicesProtos.internal_static_InvoiceItem_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.example.protos.InvoicesProtos.internal_static_Item_fieldAccessorTable
+    return org.example.protos.InvoicesProtos.internal_static_InvoiceItem_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            org.example.protos.Item.class, org.example.protos.Item.Builder.class);
+            org.example.protos.InvoiceItem.class, org.example.protos.InvoiceItem.Builder.class);
   }
 
   private int bitField0_;
@@ -292,10 +292,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof org.example.protos.Item)) {
+    if (!(obj instanceof org.example.protos.InvoiceItem)) {
       return super.equals(obj);
     }
-    org.example.protos.Item other = (org.example.protos.Item) obj;
+    org.example.protos.InvoiceItem other = (org.example.protos.InvoiceItem) obj;
 
     if (hasCategory() != other.hasCategory()) return false;
     if (hasCategory()) {
@@ -358,44 +358,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.example.protos.Item parseFrom(byte[] data)
+  public static org.example.protos.InvoiceItem parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.example.protos.Item parseFrom(java.io.InputStream input)
+  public static org.example.protos.InvoiceItem parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -403,26 +403,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static org.example.protos.Item parseDelimitedFrom(java.io.InputStream input)
+  public static org.example.protos.InvoiceItem parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static org.example.protos.Item parseDelimitedFrom(
+  public static org.example.protos.InvoiceItem parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.example.protos.Item parseFrom(
+  public static org.example.protos.InvoiceItem parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -435,7 +435,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(org.example.protos.Item prototype) {
+  public static Builder newBuilder(org.example.protos.InvoiceItem prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -451,26 +451,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code Item}
+   * Protobuf type {@code InvoiceItem}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:Item)
-      org.example.protos.ItemOrBuilder {
+      // @@protoc_insertion_point(builder_implements:InvoiceItem)
+      org.example.protos.InvoiceItemOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.example.protos.InvoicesProtos.internal_static_Item_descriptor;
+      return org.example.protos.InvoicesProtos.internal_static_InvoiceItem_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.example.protos.InvoicesProtos.internal_static_Item_fieldAccessorTable
+      return org.example.protos.InvoicesProtos.internal_static_InvoiceItem_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.example.protos.Item.class, org.example.protos.Item.Builder.class);
+              org.example.protos.InvoiceItem.class, org.example.protos.InvoiceItem.Builder.class);
     }
 
-    // Construct using org.example.protos.Item.newBuilder()
+    // Construct using org.example.protos.InvoiceItem.newBuilder()
     private Builder() {
 
     }
@@ -495,17 +495,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.example.protos.InvoicesProtos.internal_static_Item_descriptor;
+      return org.example.protos.InvoicesProtos.internal_static_InvoiceItem_descriptor;
     }
 
     @java.lang.Override
-    public org.example.protos.Item getDefaultInstanceForType() {
-      return org.example.protos.Item.getDefaultInstance();
+    public org.example.protos.InvoiceItem getDefaultInstanceForType() {
+      return org.example.protos.InvoiceItem.getDefaultInstance();
     }
 
     @java.lang.Override
-    public org.example.protos.Item build() {
-      org.example.protos.Item result = buildPartial();
+    public org.example.protos.InvoiceItem build() {
+      org.example.protos.InvoiceItem result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -513,14 +513,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public org.example.protos.Item buildPartial() {
-      org.example.protos.Item result = new org.example.protos.Item(this);
+    public org.example.protos.InvoiceItem buildPartial() {
+      org.example.protos.InvoiceItem result = new org.example.protos.InvoiceItem(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(org.example.protos.Item result) {
+    private void buildPartial0(org.example.protos.InvoiceItem result) {
       int from_bitField0_ = bitField0_;
       int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -580,16 +580,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof org.example.protos.Item) {
-        return mergeFrom((org.example.protos.Item)other);
+      if (other instanceof org.example.protos.InvoiceItem) {
+        return mergeFrom((org.example.protos.InvoiceItem)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(org.example.protos.Item other) {
-      if (other == org.example.protos.Item.getDefaultInstance()) return this;
+    public Builder mergeFrom(org.example.protos.InvoiceItem other) {
+      if (other == org.example.protos.InvoiceItem.getDefaultInstance()) return this;
       if (other.hasCategory()) {
         category_ = other.category_;
         bitField0_ |= 0x00000001;
@@ -1011,23 +1011,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:Item)
+    // @@protoc_insertion_point(builder_scope:InvoiceItem)
   }
 
-  // @@protoc_insertion_point(class_scope:Item)
-  private static final org.example.protos.Item DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:InvoiceItem)
+  private static final org.example.protos.InvoiceItem DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new org.example.protos.Item();
+    DEFAULT_INSTANCE = new org.example.protos.InvoiceItem();
   }
 
-  public static org.example.protos.Item getDefaultInstance() {
+  public static org.example.protos.InvoiceItem getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  @java.lang.Deprecated public static final com.google.protobuf.Parser<Item>
-      PARSER = new com.google.protobuf.AbstractParser<Item>() {
+  @java.lang.Deprecated public static final com.google.protobuf.Parser<InvoiceItem>
+      PARSER = new com.google.protobuf.AbstractParser<InvoiceItem>() {
     @java.lang.Override
-    public Item parsePartialFrom(
+    public InvoiceItem parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1046,17 +1046,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<Item> parser() {
+  public static com.google.protobuf.Parser<InvoiceItem> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Item> getParserForType() {
+  public com.google.protobuf.Parser<InvoiceItem> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public org.example.protos.Item getDefaultInstanceForType() {
+  public org.example.protos.InvoiceItem getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -11,11 +11,11 @@ message Invoice {
   optional int32 total_value = 4;
   optional int32 discounted_value = 5;
 
-  repeated Item items = 6;
+  repeated InvoiceItem items = 6;
 
 }
 
-message Item {
+message InvoiceItem {
   optional string category = 1;
   optional string brand = 2;
   optional string model = 3;
@@ -23,6 +23,6 @@ message Item {
   optional int32 quantity = 5;
 }
 
-message Invoices {
-  repeated Invoice Invoices = 1;
-}
+//message Invoices {
+//  repeated Invoice Invoices = 1;
+//}

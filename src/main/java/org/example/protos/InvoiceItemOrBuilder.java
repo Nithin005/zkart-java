@@ -3,8 +3,8 @@
 
 package org.example.protos;
 
-public interface ItemOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:Item)
+public interface InvoiceItemOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:InvoiceItem)
     com.google.protobuf.MessageOrBuilder {
 
   /**

@@ -230,41 +230,41 @@ private static final long serialVersionUID = 0L;
 
   public static final int ITEMS_FIELD_NUMBER = 6;
   @SuppressWarnings("serial")
-  private java.util.List<org.example.protos.Item> items_;
+  private java.util.List<org.example.protos.InvoiceItem> items_;
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
   @java.lang.Override
-  public java.util.List<org.example.protos.Item> getItemsList() {
+  public java.util.List<org.example.protos.InvoiceItem> getItemsList() {
     return items_;
   }
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
   @java.lang.Override
-  public java.util.List<? extends org.example.protos.ItemOrBuilder> 
+  public java.util.List<? extends org.example.protos.InvoiceItemOrBuilder> 
       getItemsOrBuilderList() {
     return items_;
   }
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
   @java.lang.Override
   public int getItemsCount() {
     return items_.size();
   }
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
   @java.lang.Override
-  public org.example.protos.Item getItems(int index) {
+  public org.example.protos.InvoiceItem getItems(int index) {
     return items_.get(index);
   }
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
   @java.lang.Override
-  public org.example.protos.ItemOrBuilder getItemsOrBuilder(
+  public org.example.protos.InvoiceItemOrBuilder getItemsOrBuilder(
       int index) {
     return items_.get(index);
   }
@@ -764,9 +764,9 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 40
             case 50: {
-              org.example.protos.Item m =
+              org.example.protos.InvoiceItem m =
                   input.readMessage(
-                      org.example.protos.Item.PARSER,
+                      org.example.protos.InvoiceItem.PARSER,
                       extensionRegistry);
               if (itemsBuilder_ == null) {
                 ensureItemsIsMutable();
@@ -1113,22 +1113,22 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<org.example.protos.Item> items_ =
+    private java.util.List<org.example.protos.InvoiceItem> items_ =
       java.util.Collections.emptyList();
     private void ensureItemsIsMutable() {
       if (!((bitField0_ & 0x00000020) != 0)) {
-        items_ = new java.util.ArrayList<org.example.protos.Item>(items_);
+        items_ = new java.util.ArrayList<org.example.protos.InvoiceItem>(items_);
         bitField0_ |= 0x00000020;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.example.protos.Item, org.example.protos.Item.Builder, org.example.protos.ItemOrBuilder> itemsBuilder_;
+        org.example.protos.InvoiceItem, org.example.protos.InvoiceItem.Builder, org.example.protos.InvoiceItemOrBuilder> itemsBuilder_;
 
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public java.util.List<org.example.protos.Item> getItemsList() {
+    public java.util.List<org.example.protos.InvoiceItem> getItemsList() {
       if (itemsBuilder_ == null) {
         return java.util.Collections.unmodifiableList(items_);
       } else {
@@ -1136,7 +1136,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public int getItemsCount() {
       if (itemsBuilder_ == null) {
@@ -1146,9 +1146,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public org.example.protos.Item getItems(int index) {
+    public org.example.protos.InvoiceItem getItems(int index) {
       if (itemsBuilder_ == null) {
         return items_.get(index);
       } else {
@@ -1156,10 +1156,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder setItems(
-        int index, org.example.protos.Item value) {
+        int index, org.example.protos.InvoiceItem value) {
       if (itemsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -1173,10 +1173,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder setItems(
-        int index, org.example.protos.Item.Builder builderForValue) {
+        int index, org.example.protos.InvoiceItem.Builder builderForValue) {
       if (itemsBuilder_ == null) {
         ensureItemsIsMutable();
         items_.set(index, builderForValue.build());
@@ -1187,9 +1187,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public Builder addItems(org.example.protos.Item value) {
+    public Builder addItems(org.example.protos.InvoiceItem value) {
       if (itemsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -1203,10 +1203,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder addItems(
-        int index, org.example.protos.Item value) {
+        int index, org.example.protos.InvoiceItem value) {
       if (itemsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -1220,10 +1220,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder addItems(
-        org.example.protos.Item.Builder builderForValue) {
+        org.example.protos.InvoiceItem.Builder builderForValue) {
       if (itemsBuilder_ == null) {
         ensureItemsIsMutable();
         items_.add(builderForValue.build());
@@ -1234,10 +1234,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder addItems(
-        int index, org.example.protos.Item.Builder builderForValue) {
+        int index, org.example.protos.InvoiceItem.Builder builderForValue) {
       if (itemsBuilder_ == null) {
         ensureItemsIsMutable();
         items_.add(index, builderForValue.build());
@@ -1248,10 +1248,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder addAllItems(
-        java.lang.Iterable<? extends org.example.protos.Item> values) {
+        java.lang.Iterable<? extends org.example.protos.InvoiceItem> values) {
       if (itemsBuilder_ == null) {
         ensureItemsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -1263,7 +1263,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder clearItems() {
       if (itemsBuilder_ == null) {
@@ -1276,7 +1276,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
     public Builder removeItems(int index) {
       if (itemsBuilder_ == null) {
@@ -1289,16 +1289,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public org.example.protos.Item.Builder getItemsBuilder(
+    public org.example.protos.InvoiceItem.Builder getItemsBuilder(
         int index) {
       return getItemsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public org.example.protos.ItemOrBuilder getItemsOrBuilder(
+    public org.example.protos.InvoiceItemOrBuilder getItemsOrBuilder(
         int index) {
       if (itemsBuilder_ == null) {
         return items_.get(index);  } else {
@@ -1306,9 +1306,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public java.util.List<? extends org.example.protos.ItemOrBuilder> 
+    public java.util.List<? extends org.example.protos.InvoiceItemOrBuilder> 
          getItemsOrBuilderList() {
       if (itemsBuilder_ != null) {
         return itemsBuilder_.getMessageOrBuilderList();
@@ -1317,33 +1317,33 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public org.example.protos.Item.Builder addItemsBuilder() {
+    public org.example.protos.InvoiceItem.Builder addItemsBuilder() {
       return getItemsFieldBuilder().addBuilder(
-          org.example.protos.Item.getDefaultInstance());
+          org.example.protos.InvoiceItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public org.example.protos.Item.Builder addItemsBuilder(
+    public org.example.protos.InvoiceItem.Builder addItemsBuilder(
         int index) {
       return getItemsFieldBuilder().addBuilder(
-          index, org.example.protos.Item.getDefaultInstance());
+          index, org.example.protos.InvoiceItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .Item items = 6;</code>
+     * <code>repeated .InvoiceItem items = 6;</code>
      */
-    public java.util.List<org.example.protos.Item.Builder> 
+    public java.util.List<org.example.protos.InvoiceItem.Builder> 
          getItemsBuilderList() {
       return getItemsFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.example.protos.Item, org.example.protos.Item.Builder, org.example.protos.ItemOrBuilder> 
+        org.example.protos.InvoiceItem, org.example.protos.InvoiceItem.Builder, org.example.protos.InvoiceItemOrBuilder> 
         getItemsFieldBuilder() {
       if (itemsBuilder_ == null) {
         itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            org.example.protos.Item, org.example.protos.Item.Builder, org.example.protos.ItemOrBuilder>(
+            org.example.protos.InvoiceItem, org.example.protos.InvoiceItem.Builder, org.example.protos.InvoiceItemOrBuilder>(
                 items_,
                 ((bitField0_ & 0x00000020) != 0),
                 getParentForChildren(),

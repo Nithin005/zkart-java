@@ -81,26 +81,26 @@ public interface InvoiceOrBuilder extends
   int getDiscountedValue();
 
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
-  java.util.List<org.example.protos.Item> 
+  java.util.List<org.example.protos.InvoiceItem> 
       getItemsList();
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
-  org.example.protos.Item getItems(int index);
+  org.example.protos.InvoiceItem getItems(int index);
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
   int getItemsCount();
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
-  java.util.List<? extends org.example.protos.ItemOrBuilder> 
+  java.util.List<? extends org.example.protos.InvoiceItemOrBuilder> 
       getItemsOrBuilderList();
   /**
-   * <code>repeated .Item items = 6;</code>
+   * <code>repeated .InvoiceItem items = 6;</code>
    */
-  org.example.protos.ItemOrBuilder getItemsOrBuilder(
+  org.example.protos.InvoiceItemOrBuilder getItemsOrBuilder(
       int index);
 }
