@@ -19,7 +19,7 @@ public class AdminFlow {
             return;
         }
         int newStock = Utils.promptInt("Enter stock to be added: ");
-        dbHelper.updateStock(item, newStock);
+        dbHelper.setStock(item, item.getStock() + newStock);
         System.out.println("stock updated");
     }
 

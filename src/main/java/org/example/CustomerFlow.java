@@ -119,7 +119,7 @@ public class CustomerFlow {
 
         // update stocks in db
         for(Item item: cartItems){
-            dbHelper.updateStock(item, item.getStock()-item.getQuantity());
+            dbHelper.setStock(item, item.getStock()-item.getQuantity());
         }
         if(userDiscountCode != null){
             dbHelper.updateDiscountCodeExpiry(customer);

@@ -173,8 +173,8 @@ public class DBHelper {
     }
 
 
-    public void updateStock(Item item, int newStock){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE inventory SET stock = stock + ? WHERE item_id = ?")){
+    public void setStock(Item item, int newStock){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE inventory SET stock = ? WHERE item_id = ?")){
             stmt.setInt(1, newStock);
             stmt.setInt(2, item.getItemId());
             stmt.executeUpdate();
