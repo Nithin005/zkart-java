@@ -23,12 +23,14 @@ public class Main {
 
         boolean loadFromFile = true;
 
-        if (!Files.exists(Path.of("sample.db"))){
-            loadFromFile = true;
-            System.out.println("running program for the first time. recommend to press (Y) for next prompt");
-        }
+//        if (!Files.exists(Path.of("sample.db"))){
+//            loadFromFile = true;
+//            System.out.println("running program for the first time. recommend to press (Y) for next prompt");
+//        }
         try {
-            dbHelper = new DBHelper("jdbc:sqlite:sample.db");
+//            dbHelper = new DBHelper("jdbc:sqlite:sample.db");
+            dbHelper = new DBHelper("jdbc:mysql://localhost:3306/test?" +
+                    "user=test&password=test");
         } catch (SQLException e){
             throw  new RuntimeException(e);
         }
@@ -103,6 +105,9 @@ public class Main {
             }
             CustomerFlow customerFlow = new CustomerFlow(customer, userInvoices);
             while (true) {
+                // deal of the moment
+                System.out.println("/".repeat(10)+" DEAL OF THE MOMENT (10% discount) "+"/".repeat(10));
+                Utils.printItems(List.of(customerFlow.getDealOfTheMomentItem(dbHelper)));
                 int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "Exit"));
                 switch (choice){
                     case 0:

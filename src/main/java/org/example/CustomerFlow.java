@@ -129,4 +129,8 @@ public class CustomerFlow {
         return invoice;
     }
 
+    public Item getDealOfTheMomentItem(DBHelper dbHelper){
+        return getHighestStockItem(dbHelper);
+    }
+
  }

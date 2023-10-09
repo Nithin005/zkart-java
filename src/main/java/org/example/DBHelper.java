@@ -23,19 +23,19 @@ public class DBHelper {
 
     private void _createTable() {
         String createCustomerTableSql = "CREATE TABLE customer (" +
-                "customer_id INTEGER PRIMARY KEY," +
-                "email TEXT NOT NULL," +
-                "encrypted_pwd TEXT NOT NULL," +
-                "name TEXT NOT NULL," +
-                "mobile TEXT NOT NULL," +
-                "discount_code TEXT," +
+                "customer_id INTEGER AUTO_INCREMENT PRIMARY KEY," +
+                "email VARCHAR(255) NOT NULL," +
+                "encrypted_pwd VARCHAR(255) NOT NULL," +
+                "name VARCHAR(255) NOT NULL," +
+                "mobile VARCHAR(255) NOT NULL," +
+                "discount_code VARCHAR(255)," +
                 "discount_expiry INTEGER" +
                 ");";
         String createInventoryTableSql = "CREATE TABLE inventory (" +
-                "item_id INTEGER PRIMARY KEY," +
-                "category TEXT," +
-                "brand TEXT," +
-                "model TEXT," +
+                "item_id INTEGER AUTO_INCREMENT PRIMARY KEY," +
+                "category VARCHAR(255)," +
+                "brand VARCHAR(255)," +
+                "model VARCHAR(255)," +
                 "price INTEGER," +
                 "stock INTEGER" +
                 ");";
