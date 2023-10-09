@@ -74,18 +74,18 @@ public class Main {
                             break;
                         case 1:
                             // change password
-                            String pwd = Utils.promptChangePassword();
-                            if(pwd == null){
-                                break;
-                            }
-                            boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
-                            if(success){
-                                Utils.updateAdminPwd(pwd);
-                                customer.setPassword(pwd);
-                                System.out.println("password changed");
-                            } else {
-                                System.out.println("password change failed");
-                            }
+                            boolean success = false;
+                            String pwd;
+                            do {
+                                pwd = Utils.promptChangePassword();
+                                success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
+                                if(!success){
+                                    System.out.println("password change failed");
+                                }
+                            } while (!success);
+                            Utils.updateAdminPwd(pwd);
+                            customer.setPassword(pwd);
+                            System.out.println("password changed");
                             break;
                         case 2:
                             break inner_admin;
@@ -148,18 +148,18 @@ public class Main {
                             break;
                         case 4:
                             // change password
-                            String pwd = Utils.promptChangePassword();
-                            if(pwd == null){
-                                break;
-                            }
-                            boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
-                            if(success){
-                                dbHelper.updateCustomerPwd(customer, pwd);
-                                customer.setPassword(pwd);
-                                System.out.println("password changed");
-                            } else {
-                                System.out.println("password change failed");
-                            }
+                            boolean success = false;
+                            String pwd;
+                            do {
+                                pwd = Utils.promptChangePassword();
+                                success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
+                                if(!success){
+                                    System.out.println("password change failed");
+                                }
+                            } while(!success);
+                            dbHelper.updateCustomerPwd(customer, pwd);
+                            customer.setPassword(pwd);
+                            System.out.println("password changed");
                             break;
                         case 5:
                             // exit
@@ -211,23 +211,21 @@ public class Main {
                 String newEmailId = Utils.promptEmail("Enter username/emailId: ");
                 String newName = Utils.promptString("Enter name: ");
                 String newMobile = Utils.promptMobileNo("Enter mobileNo: ");
-                pwd = Utils.promptChangePassword();
-                if(pwd == null){
-                    break;
-                }
                 Customer newCustomer = new Customer(0, newEmailId, "", newName, newMobile);
+                boolean success = false;
+//                String pwd;
+                do {
+                    pwd = Utils.promptChangePassword();
+                    success = changePassword(pwd, newCustomer.getCustomerId(), pwdHistoryFile);
+                    if(!success){
+                        System.out.println("password change failed");
+                    }
+                } while(!success);
                 newCustomer.setPassword(pwd);
-                boolean success = changePassword(pwd, newCustomer.getCustomerId(), pwdHistoryFile);
-                if(success){
-                    newCustomer.setPassword(pwd);
-                    int customerId = dbHelper.addCustomer(newCustomer);
-                    newCustomer.setCustomerId(customerId);
-                    System.out.println("new account created");
-                    return newCustomer;
-                } else {
-                    System.out.println("failed to create account");
-                }
-                return null;
+                int customerId = dbHelper.addCustomer(newCustomer);
+                newCustomer.setCustomerId(customerId);
+                System.out.println("new account created");
+                return newCustomer;
             case 2:
                 System.exit(0);
         }
@@ -235,11 +233,7 @@ public class Main {
     }
 
     public static boolean changePassword(String pwd, Integer customer_id, String pwdHistoryFile){
-        // 1. check password strength
-        if(!Utils.checkPwdStrength(pwd)) {
-            System.out.println("password strength low");
-        }
-        // 2. check prev 3 passwords
+        // 1. check prev 3 passwords
         Path pwdHistoryFilePath = Path.of(pwdHistoryFile);
         Map<Integer, List<String>> pwdHistory = Utils.readPwdHistory(pwdHistoryFilePath);
         List<String> userPwdHistory = pwdHistory.getOrDefault(customer_id, new ArrayList<>(List.of("", "", "")));

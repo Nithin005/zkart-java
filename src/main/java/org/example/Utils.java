@@ -121,6 +121,11 @@ public class Utils {
     public static String promptChangePassword(){
         while (true) {
             String newPwd = Utils.promptString("Enter new password: ");
+            // 1. check password strength
+            if(!checkPwdStrength(newPwd)) {
+                System.out.println("password strength low");
+                continue;
+            }
             String newPwd2 = Utils.promptString("Enter new confirm password: ");
             if (!newPwd.equals(newPwd2)) {
                 System.out.println("passwords don't match");
