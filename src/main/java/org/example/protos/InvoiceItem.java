@@ -85,9 +85,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        category_ = s;
-      }
+      category_ = s;
       return s;
     }
   }
@@ -134,9 +132,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        brand_ = s;
-      }
+      brand_ = s;
       return s;
     }
   }
@@ -183,9 +179,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        model_ = s;
-      }
+      model_ = s;
       return s;
     }
   }
@@ -686,17 +680,17 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 8
             case 18: {
-              category_ = input.readBytes();
+              category_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              brand_ = input.readBytes();
+              brand_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
-              model_ = input.readBytes();
+              model_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
@@ -785,9 +779,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          category_ = s;
-        }
+        category_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -841,6 +833,7 @@ private static final long serialVersionUID = 0L;
     public Builder setCategoryBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
       category_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
@@ -865,9 +858,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          brand_ = s;
-        }
+        brand_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -921,6 +912,7 @@ private static final long serialVersionUID = 0L;
     public Builder setBrandBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
       brand_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
@@ -945,9 +937,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          model_ = s;
-        }
+        model_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -1001,6 +991,7 @@ private static final long serialVersionUID = 0L;
     public Builder setModelBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
       model_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
@@ -1112,7 +1103,7 @@ private static final long serialVersionUID = 0L;
     return DEFAULT_INSTANCE;
   }
 
-  @java.lang.Deprecated public static final com.google.protobuf.Parser<InvoiceItem>
+  private static final com.google.protobuf.Parser<InvoiceItem>
       PARSER = new com.google.protobuf.AbstractParser<InvoiceItem>() {
     @java.lang.Override
     public InvoiceItem parsePartialFrom(

@@ -67,9 +67,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        invoiceNo_ = s;
-      }
+      invoiceNo_ = s;
       return s;
     }
   }
@@ -116,9 +114,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        datetime_ = s;
-      }
+      datetime_ = s;
       return s;
     }
   }
@@ -184,9 +180,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        email_ = s;
-      }
+      email_ = s;
       return s;
     }
   }
@@ -782,12 +776,12 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              invoiceNo_ = input.readBytes();
+              invoiceNo_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
             case 18: {
-              datetime_ = input.readBytes();
+              datetime_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
@@ -797,7 +791,7 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 24
             case 34: {
-              email_ = input.readBytes();
+              email_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
@@ -814,7 +808,7 @@ private static final long serialVersionUID = 0L;
             case 58: {
               org.example.protos.InvoiceItem m =
                   input.readMessage(
-                      org.example.protos.InvoiceItem.PARSER,
+                      org.example.protos.InvoiceItem.parser(),
                       extensionRegistry);
               if (itemsBuilder_ == null) {
                 ensureItemsIsMutable();
@@ -859,9 +853,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          invoiceNo_ = s;
-        }
+        invoiceNo_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -915,6 +907,7 @@ private static final long serialVersionUID = 0L;
     public Builder setInvoiceNoBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
       invoiceNo_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
@@ -939,9 +932,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          datetime_ = s;
-        }
+        datetime_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -995,6 +986,7 @@ private static final long serialVersionUID = 0L;
     public Builder setDatetimeBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
       datetime_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
@@ -1059,9 +1051,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          email_ = s;
-        }
+        email_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -1115,6 +1105,7 @@ private static final long serialVersionUID = 0L;
     public Builder setEmailBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
       email_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
@@ -1466,7 +1457,7 @@ private static final long serialVersionUID = 0L;
     return DEFAULT_INSTANCE;
   }
 
-  @java.lang.Deprecated public static final com.google.protobuf.Parser<Invoice>
+  private static final com.google.protobuf.Parser<Invoice>
       PARSER = new com.google.protobuf.AbstractParser<Invoice>() {
     @java.lang.Override
     public Invoice parsePartialFrom(

@@ -1,12 +1,15 @@
 package org.example;
 
 import org.example.protos.Invoice;
+import org.example.protos.Invoices;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Main {
@@ -96,9 +99,9 @@ public class Main {
                 List<Invoice> userInvoices = new ArrayList<>();
                 if(Files.exists(invoiceProtoPath)) {
                     try (InputStream is = Files.newInputStream(invoiceProtoPath, StandardOpenOption.CREATE)) {
-                        Invoice invoice;
-                        while((invoice = Invoice.parseDelimitedFrom(is)) != null){
-                            if (invoice.getCustomerId() == customer.getCustomerId()){
+                        Invoices invoices = Invoices.parseFrom(is);
+                        for(Invoice invoice: invoices.getInvoicesList()){
+                            if(invoice.getCustomerId() == customer.getCustomerId()){
                                 userInvoices.add(invoice);
                             }
                         }
@@ -113,7 +116,7 @@ public class Main {
                     // deal of the moment
                     System.out.println("/".repeat(10)+" DEAL OF THE MOMENT (10% discount) "+"/".repeat(10));
                     Utils.printItems(List.of(customerFlow.getDealOfTheMomentItem(dbHelper)));
-                    int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "Exit"));
+                    int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "view invoices range", "Exit"));
                     switch (choice){
                         case 0:
                             // shop
@@ -162,6 +165,27 @@ public class Main {
                             System.out.println("password changed");
                             break;
                         case 5:
+                            // view invoices range
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            String fromDateString = Utils.promptStringLine("Enter from date (yyyy-MM-dd HH:mm:ss): ");
+                            LocalDateTime fromDate = LocalDateTime.parse(fromDateString, formatter);
+                            String toDateString = Utils.promptStringLine("Enter to date (yyyy-MM-dd HH:mm:ss): ");
+                            LocalDateTime toDate = LocalDateTime.parse(toDateString, formatter);
+                            List<Invoice> invoicesInRange = new ArrayList<>();
+
+                            for(Invoice inv: customerFlow.getInvoices()){
+                                LocalDateTime invoiceDateTime = LocalDateTime.parse(inv.getDatetime());
+                                if(invoiceDateTime.isAfter(fromDate) && invoiceDateTime.isBefore(toDate)){
+                                    invoicesInRange.add(inv);
+                                }
+                            }
+                            if(invoicesInRange.isEmpty()){
+                                System.out.println("no invoices found in range");
+                            } else {
+                                Utils.printInvoices(invoicesInRange);
+                            }
+                            break;
+                        case 6:
                             // exit
                             break inner_customer;
                     }

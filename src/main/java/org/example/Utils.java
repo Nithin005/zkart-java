@@ -2,9 +2,11 @@ package org.example;
 
 import org.example.protos.Invoice;
 import org.example.protos.InvoiceItem;
+import org.example.protos.Invoices;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
@@ -59,6 +61,20 @@ public class Utils {
             System.out.print(prompt);
             try {
                 return sc.next();
+            } catch (InputMismatchException e) {
+                System.out.println("input invalid");
+                sc.nextLine();
+            }
+        }
+    }
+
+    public static String promptStringLine(String prompt) {
+        Scanner in = new Scanner(System.in);
+        in.useDelimiter("\n");
+        while (true) {
+            System.out.println(prompt);
+            try {
+                return in.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("input invalid");
                 sc.nextLine();
@@ -316,8 +332,18 @@ public class Utils {
     }
 
     public static void saveInvoice(Invoice invoice, Path path) {
-        try (OutputStream os = Files.newOutputStream(path, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-            invoice.writeDelimitedTo(os);
+        List<Invoice> invoicesList;
+        try (InputStream is = Files.newInputStream(path, StandardOpenOption.CREATE)){
+            invoicesList = Invoices.parseFrom(is).getInvoicesList();
+        } catch (NoSuchFileException e){
+            invoicesList = new ArrayList<>();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        try (OutputStream os = Files.newOutputStream(path, StandardOpenOption.CREATE)) {
+            Invoices invoices = Invoices.newBuilder().addAllInvoices(invoicesList).addInvoices(invoice).build();
+            invoices.writeTo(os);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
