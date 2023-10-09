@@ -45,113 +45,131 @@ public class Main {
             }
         }
 
-        // login flow
-        while(customer == null){
-            customer = loginFlow(dbHelper, PWD_HISTORY_FILE);
-            if (customer == null) {
-                System.out.println("loginFlow invalid");
+        outer:
+        while (true) {
+            // login flow
+            while(customer == null){
+                customer = loginFlow(dbHelper, PWD_HISTORY_FILE);
+                if (customer == null) {
+                    System.out.println("loginFlow invalid");
+                }
             }
-        }
 
-        if(customer.isAdmin()){
-            AdminFlow adminFlow = new AdminFlow(customer);
-            while(true){
-                int choice;
-                if(adminFlow.isAdminDefaultPwd()){
-                    System.out.println("change default password");
-                    choice = 1;
-                } else {
-                    choice = Utils.promptChoice(List.of("List low stock items", "Change password", "Exit"));
-                }
-                switch (choice){
-                    case 0:
-                        // list low stock items
-                        adminFlow.restockItems(dbHelper);
-                        break;
-                    case 1:
-                        // change password
-                        String pwd = Utils.promptChangePassword();
-                        if(pwd == null){
-                            break;
-                        }
-                        boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
-                        if(success){
-                            Utils.updateAdminPwd(pwd);
-                            customer.setPassword(pwd);
-                            System.out.println("password changed");
-                        } else {
-                            System.out.println("password change failed");
-                        }
-                        break;
-                    case 2:
-                        System.exit(0);
-                        break;
-                }
-            }
-        } else {
-            // load invoices
-            List<Invoice> userInvoices = new ArrayList<>();
-            if(Files.exists(invoiceProtoPath)) {
-                try (InputStream is = Files.newInputStream(invoiceProtoPath, StandardOpenOption.CREATE)) {
-                    Invoice invoice;
-                    while((invoice = Invoice.parseDelimitedFrom(is)) != null){
-                        if (invoice.getCustomerId() == customer.getCustomerId()){
-                            userInvoices.add(invoice);
-                        }
+            if(customer.isAdmin()){
+                AdminFlow adminFlow = new AdminFlow(customer);
+
+                inner_admin:
+                while(true){
+                    int choice;
+                    if(adminFlow.isAdminDefaultPwd()){
+                        System.out.println("change default password");
+                        choice = 1;
+                    } else {
+                        choice = Utils.promptChoice(List.of("List low stock items", "Change password", "Exit"));
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            CustomerFlow customerFlow = new CustomerFlow(customer, userInvoices);
-            while (true) {
-                // deal of the moment
-                System.out.println("/".repeat(10)+" DEAL OF THE MOMENT (10% discount) "+"/".repeat(10));
-                Utils.printItems(List.of(customerFlow.getDealOfTheMomentItem(dbHelper)));
-                int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "Exit"));
-                switch (choice){
-                    case 0:
-                        // shop
-                        customerFlow.shopFlow(dbHelper);
-                        break;
-                    case 1:
-                        // view cart
-                        Utils.printCartItems(customerFlow.getCartItems());
-                        break;
-                    case 2:
-                        // checkout
-                        Invoice invoice = customerFlow.checkout(dbHelper);
-                        if (invoice == null){
-                            continue;
-                        }
-                        Utils.saveInvoice(invoice, invoiceProtoPath);
-                        break;
-                    case 3:
-                        // view invoices
-                        Utils.printInvoices(customerFlow.getInvoices());
-                        break;
-                    case 4:
-                        // change password
-                        String pwd = Utils.promptChangePassword();
-                        if(pwd == null){
+                    switch (choice){
+                        case 0:
+                            // list low stock items
+                            adminFlow.restockItems(dbHelper);
                             break;
-                        }
-                        boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
-                        if(success){
-                            dbHelper.updateCustomerPwd(customer, pwd);
-                            customer.setPassword(pwd);
-                            System.out.println("password changed");
-                        } else {
-                            System.out.println("password change failed");
-                        }
-                        break;
-                    case 5:
-                        // exit
-                        System.exit(0);
-                        break;
+                        case 1:
+                            // change password
+                            String pwd = Utils.promptChangePassword();
+                            if(pwd == null){
+                                break;
+                            }
+                            boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
+                            if(success){
+                                Utils.updateAdminPwd(pwd);
+                                customer.setPassword(pwd);
+                                System.out.println("password changed");
+                            } else {
+                                System.out.println("password change failed");
+                            }
+                            break;
+                        case 2:
+                            break inner_admin;
+                    }
                 }
+            } else {
+                // load invoices
+                List<Invoice> userInvoices = new ArrayList<>();
+                if(Files.exists(invoiceProtoPath)) {
+                    try (InputStream is = Files.newInputStream(invoiceProtoPath, StandardOpenOption.CREATE)) {
+                        Invoice invoice;
+                        while((invoice = Invoice.parseDelimitedFrom(is)) != null){
+                            if (invoice.getCustomerId() == customer.getCustomerId()){
+                                userInvoices.add(invoice);
+                            }
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                CustomerFlow customerFlow = new CustomerFlow(customer, userInvoices);
 
+                inner_customer:
+                while (true) {
+                    // deal of the moment
+                    System.out.println("/".repeat(10)+" DEAL OF THE MOMENT (10% discount) "+"/".repeat(10));
+                    Utils.printItems(List.of(customerFlow.getDealOfTheMomentItem(dbHelper)));
+                    int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "Exit"));
+                    switch (choice){
+                        case 0:
+                            // shop
+                            customerFlow.shopFlow(dbHelper);
+                            break;
+                        case 1:
+                            // view cart
+                            List<Item> cartItems = customerFlow.getCartItems();
+                            if(cartItems.isEmpty()){
+                                System.out.println("no items in cart");
+                            } else {
+                                Utils.printCartItems(cartItems);
+                            }
+
+                            break;
+                        case 2:
+                            // checkout
+                            Invoice invoice = customerFlow.checkout(dbHelper);
+                            if (invoice == null){
+                                continue;
+                            }
+                            Utils.saveInvoice(invoice, invoiceProtoPath);
+                            break;
+                        case 3:
+                            // view invoices
+                            List<Invoice> _userInvoices = customerFlow.getInvoices();
+                            if(_userInvoices.isEmpty()){
+                                System.out.println("no invoices");
+                            } else {
+                                Utils.printInvoices(_userInvoices);
+                            }
+                            break;
+                        case 4:
+                            // change password
+                            String pwd = Utils.promptChangePassword();
+                            if(pwd == null){
+                                break;
+                            }
+                            boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
+                            if(success){
+                                dbHelper.updateCustomerPwd(customer, pwd);
+                                customer.setPassword(pwd);
+                                System.out.println("password changed");
+                            } else {
+                                System.out.println("password change failed");
+                            }
+                            break;
+                        case 5:
+                            // exit
+                            break inner_customer;
+                    }
+
+                }
             }
+            // clean up
+            customer = null;
         }
     }
 
@@ -210,7 +228,7 @@ public class Main {
                     System.out.println("failed to create account");
                 }
                 return null;
-            case 3:
+            case 2:
                 System.exit(0);
         }
         return null;

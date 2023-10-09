@@ -14,6 +14,10 @@ public class AdminFlow {
     public void restockItems(DBHelper dbHelper){
         int threshold = Utils.promptInt("Enter stock threshold: ");
         List<Item> items = dbHelper.queryItems("WHERE stock <= "+ threshold + ";");
+        if(items.isEmpty()){
+            System.out.println("no items in specified filter");
+            return;
+        }
         Item item = Utils.promptItems(items);
         if(item == null) {
             return;

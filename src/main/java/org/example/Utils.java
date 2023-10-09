@@ -54,29 +54,54 @@ public class Utils {
     }
 
     public static String promptString(String prompt) {
-        System.out.print(prompt);
-        return sc.next();
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return sc.next();
+            } catch (InputMismatchException e) {
+                System.out.println("input invalid");
+                sc.nextLine();
+            }
+        }
     }
 
     public static int promptInt(String prompt) {
-        System.out.print(prompt);
-        return sc.nextInt();
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("input invalid");
+                sc.nextLine();
+            }
+
+        }
     }
 
     public static boolean promptBoolean(String prompt) {
-        System.out.print(prompt);
-        String input = sc.next();
-        return input.equals("Y") | input.equals("y");
+        while (true){
+            System.out.print(prompt);
+            try {
+                String input = sc.next();
+                return input.equals("Y") | input.equals("y");
+            } catch (InputMismatchException e) {
+                System.out.println("input invalid");
+                sc.nextLine();
+            }
+        }
+
     }
 
     public static String promptChangePassword(){
-        String newPwd = Utils.promptString("Enter new password: ");
-        String newPwd2 = Utils.promptString("Enter new confirm password: ");
-        if (!newPwd.equals(newPwd2)){
-            System.out.println("passwords don't match");
-            return null;
+        while (true) {
+            String newPwd = Utils.promptString("Enter new password: ");
+            String newPwd2 = Utils.promptString("Enter new confirm password: ");
+            if (!newPwd.equals(newPwd2)) {
+                System.out.println("passwords don't match");
+                continue;
+            }
+            return newPwd;
         }
-        return newPwd;
     }
 
 
