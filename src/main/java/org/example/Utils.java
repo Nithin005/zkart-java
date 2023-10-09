@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Utils {
     private static final Scanner sc = new Scanner(System.in);
@@ -90,6 +91,31 @@ public class Utils {
             }
         }
 
+    }
+
+    public static String promptEmail(String prompt){
+        // RFC 5322
+        String regexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        while(true){
+            String testEmail = promptString(prompt);
+            if(patternMatches(testEmail, regexPattern)){
+                return testEmail;
+            } else {
+                System.out.println("not a valid email");
+            }
+        }
+    }
+
+    public static String promptMobileNo(String prompt){
+        String regexPattern = "/^\\+?[1-9][0-9]{7,14}$/";
+        while(true){
+            String testPhoneNo = promptString(prompt);
+            if(patternMatches(testPhoneNo, regexPattern)){
+                return testPhoneNo;
+            } else {
+                System.out.println("not a valid phone no");
+            }
+        }
     }
 
     public static String promptChangePassword(){
@@ -290,6 +316,12 @@ public class Utils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static boolean patternMatches(String emailAddress, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
     }
 
 }

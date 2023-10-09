@@ -208,9 +208,9 @@ public class Main {
                 return curCustomer;
             case 1:
                 // register
-                String newEmailId = Utils.promptString("Enter username/emailId: ");
+                String newEmailId = Utils.promptEmail("Enter username/emailId: ");
                 String newName = Utils.promptString("Enter name: ");
-                String newMobile = Utils.promptString("Enter mobileNo: ");
+                String newMobile = Utils.promptMobileNo("Enter mobileNo: ");
                 pwd = Utils.promptChangePassword();
                 if(pwd == null){
                     break;
