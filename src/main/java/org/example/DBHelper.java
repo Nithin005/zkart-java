@@ -29,7 +29,8 @@ public class DBHelper {
                 "name VARCHAR(255) NOT NULL," +
                 "mobile VARCHAR(255) NOT NULL," +
                 "discount_code VARCHAR(255)," +
-                "discount_expiry INTEGER" +
+                "discount_expiry INTEGER," +
+                "UNIQUE (email)" +
                 ");";
         String createInventoryTableSql = "CREATE TABLE inventory (" +
                 "item_id INTEGER AUTO_INCREMENT PRIMARY KEY," +
