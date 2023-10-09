@@ -42,19 +42,38 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
-  public static final int CATEGORY_FIELD_NUMBER = 1;
+  public static final int ITEM_ID_FIELD_NUMBER = 1;
+  private int itemId_ = 0;
+  /**
+   * <code>optional int32 item_id = 1;</code>
+   * @return Whether the itemId field is set.
+   */
+  @java.lang.Override
+  public boolean hasItemId() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional int32 item_id = 1;</code>
+   * @return The itemId.
+   */
+  @java.lang.Override
+  public int getItemId() {
+    return itemId_;
+  }
+
+  public static final int CATEGORY_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
   private volatile java.lang.Object category_ = "";
   /**
-   * <code>optional string category = 1;</code>
+   * <code>optional string category = 2;</code>
    * @return Whether the category field is set.
    */
   @java.lang.Override
   public boolean hasCategory() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
-   * <code>optional string category = 1;</code>
+   * <code>optional string category = 2;</code>
    * @return The category.
    */
   @java.lang.Override
@@ -73,7 +92,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>optional string category = 1;</code>
+   * <code>optional string category = 2;</code>
    * @return The bytes for category.
    */
   @java.lang.Override
@@ -91,19 +110,19 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int BRAND_FIELD_NUMBER = 2;
+  public static final int BRAND_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object brand_ = "";
   /**
-   * <code>optional string brand = 2;</code>
+   * <code>optional string brand = 3;</code>
    * @return Whether the brand field is set.
    */
   @java.lang.Override
   public boolean hasBrand() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
-   * <code>optional string brand = 2;</code>
+   * <code>optional string brand = 3;</code>
    * @return The brand.
    */
   @java.lang.Override
@@ -122,7 +141,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>optional string brand = 2;</code>
+   * <code>optional string brand = 3;</code>
    * @return The bytes for brand.
    */
   @java.lang.Override
@@ -140,19 +159,19 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int MODEL_FIELD_NUMBER = 3;
+  public static final int MODEL_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
   private volatile java.lang.Object model_ = "";
   /**
-   * <code>optional string model = 3;</code>
+   * <code>optional string model = 4;</code>
    * @return Whether the model field is set.
    */
   @java.lang.Override
   public boolean hasModel() {
-    return ((bitField0_ & 0x00000004) != 0);
+    return ((bitField0_ & 0x00000008) != 0);
   }
   /**
-   * <code>optional string model = 3;</code>
+   * <code>optional string model = 4;</code>
    * @return The model.
    */
   @java.lang.Override
@@ -171,7 +190,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>optional string model = 3;</code>
+   * <code>optional string model = 4;</code>
    * @return The bytes for model.
    */
   @java.lang.Override
@@ -189,18 +208,18 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PRICE_FIELD_NUMBER = 4;
+  public static final int PRICE_FIELD_NUMBER = 5;
   private int price_ = 0;
   /**
-   * <code>optional int32 price = 4;</code>
+   * <code>optional int32 price = 5;</code>
    * @return Whether the price field is set.
    */
   @java.lang.Override
   public boolean hasPrice() {
-    return ((bitField0_ & 0x00000008) != 0);
+    return ((bitField0_ & 0x00000010) != 0);
   }
   /**
-   * <code>optional int32 price = 4;</code>
+   * <code>optional int32 price = 5;</code>
    * @return The price.
    */
   @java.lang.Override
@@ -208,18 +227,18 @@ private static final long serialVersionUID = 0L;
     return price_;
   }
 
-  public static final int QUANTITY_FIELD_NUMBER = 5;
+  public static final int QUANTITY_FIELD_NUMBER = 6;
   private int quantity_ = 0;
   /**
-   * <code>optional int32 quantity = 5;</code>
+   * <code>optional int32 quantity = 6;</code>
    * @return Whether the quantity field is set.
    */
   @java.lang.Override
   public boolean hasQuantity() {
-    return ((bitField0_ & 0x00000010) != 0);
+    return ((bitField0_ & 0x00000020) != 0);
   }
   /**
-   * <code>optional int32 quantity = 5;</code>
+   * <code>optional int32 quantity = 6;</code>
    * @return The quantity.
    */
   @java.lang.Override
@@ -242,19 +261,22 @@ private static final long serialVersionUID = 0L;
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (((bitField0_ & 0x00000001) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, category_);
+      output.writeInt32(1, itemId_);
     }
     if (((bitField0_ & 0x00000002) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, brand_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, category_);
     }
     if (((bitField0_ & 0x00000004) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, model_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, brand_);
     }
     if (((bitField0_ & 0x00000008) != 0)) {
-      output.writeInt32(4, price_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, model_);
     }
     if (((bitField0_ & 0x00000010) != 0)) {
-      output.writeInt32(5, quantity_);
+      output.writeInt32(5, price_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      output.writeInt32(6, quantity_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -266,21 +288,25 @@ private static final long serialVersionUID = 0L;
 
     size = 0;
     if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, category_);
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, itemId_);
     }
     if (((bitField0_ & 0x00000002) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, brand_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, category_);
     }
     if (((bitField0_ & 0x00000004) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, model_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, brand_);
     }
     if (((bitField0_ & 0x00000008) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, price_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, model_);
     }
     if (((bitField0_ & 0x00000010) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, quantity_);
+        .computeInt32Size(5, price_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(6, quantity_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -297,6 +323,11 @@ private static final long serialVersionUID = 0L;
     }
     org.example.protos.InvoiceItem other = (org.example.protos.InvoiceItem) obj;
 
+    if (hasItemId() != other.hasItemId()) return false;
+    if (hasItemId()) {
+      if (getItemId()
+          != other.getItemId()) return false;
+    }
     if (hasCategory() != other.hasCategory()) return false;
     if (hasCategory()) {
       if (!getCategory()
@@ -333,6 +364,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    if (hasItemId()) {
+      hash = (37 * hash) + ITEM_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getItemId();
+    }
     if (hasCategory()) {
       hash = (37 * hash) + CATEGORY_FIELD_NUMBER;
       hash = (53 * hash) + getCategory().hashCode();
@@ -484,6 +519,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      itemId_ = 0;
       category_ = "";
       brand_ = "";
       model_ = "";
@@ -524,24 +560,28 @@ private static final long serialVersionUID = 0L;
       int from_bitField0_ = bitField0_;
       int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.category_ = category_;
+        result.itemId_ = itemId_;
         to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.brand_ = brand_;
+        result.category_ = category_;
         to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.model_ = model_;
+        result.brand_ = brand_;
         to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.price_ = price_;
+        result.model_ = model_;
         to_bitField0_ |= 0x00000008;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.quantity_ = quantity_;
+        result.price_ = price_;
         to_bitField0_ |= 0x00000010;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.quantity_ = quantity_;
+        to_bitField0_ |= 0x00000020;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -590,19 +630,22 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.example.protos.InvoiceItem other) {
       if (other == org.example.protos.InvoiceItem.getDefaultInstance()) return this;
+      if (other.hasItemId()) {
+        setItemId(other.getItemId());
+      }
       if (other.hasCategory()) {
         category_ = other.category_;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
       }
       if (other.hasBrand()) {
         brand_ = other.brand_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       if (other.hasModel()) {
         model_ = other.model_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       if (other.hasPrice()) {
@@ -637,31 +680,36 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 10: {
-              category_ = input.readBytes();
+            case 8: {
+              itemId_ = input.readInt32();
               bitField0_ |= 0x00000001;
               break;
-            } // case 10
+            } // case 8
             case 18: {
-              brand_ = input.readBytes();
+              category_ = input.readBytes();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              model_ = input.readBytes();
+              brand_ = input.readBytes();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
-            case 32: {
-              price_ = input.readInt32();
+            case 34: {
+              model_ = input.readBytes();
               bitField0_ |= 0x00000008;
               break;
-            } // case 32
+            } // case 34
             case 40: {
-              quantity_ = input.readInt32();
+              price_ = input.readInt32();
               bitField0_ |= 0x00000010;
               break;
             } // case 40
+            case 48: {
+              quantity_ = input.readInt32();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -679,16 +727,56 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object category_ = "";
+    private int itemId_ ;
     /**
-     * <code>optional string category = 1;</code>
-     * @return Whether the category field is set.
+     * <code>optional int32 item_id = 1;</code>
+     * @return Whether the itemId field is set.
      */
-    public boolean hasCategory() {
+    @java.lang.Override
+    public boolean hasItemId() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>optional string category = 1;</code>
+     * <code>optional int32 item_id = 1;</code>
+     * @return The itemId.
+     */
+    @java.lang.Override
+    public int getItemId() {
+      return itemId_;
+    }
+    /**
+     * <code>optional int32 item_id = 1;</code>
+     * @param value The itemId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setItemId(int value) {
+
+      itemId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional int32 item_id = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearItemId() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      itemId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object category_ = "";
+    /**
+     * <code>optional string category = 2;</code>
+     * @return Whether the category field is set.
+     */
+    public boolean hasCategory() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional string category = 2;</code>
      * @return The category.
      */
     public java.lang.String getCategory() {
@@ -706,7 +794,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string category = 1;</code>
+     * <code>optional string category = 2;</code>
      * @return The bytes for category.
      */
     public com.google.protobuf.ByteString
@@ -723,7 +811,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string category = 1;</code>
+     * <code>optional string category = 2;</code>
      * @param value The category to set.
      * @return This builder for chaining.
      */
@@ -731,22 +819,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       category_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>optional string category = 1;</code>
+     * <code>optional string category = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearCategory() {
       category_ = getDefaultInstance().getCategory();
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>optional string category = 1;</code>
+     * <code>optional string category = 2;</code>
      * @param value The bytes for category to set.
      * @return This builder for chaining.
      */
@@ -754,21 +842,21 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       category_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
 
     private java.lang.Object brand_ = "";
     /**
-     * <code>optional string brand = 2;</code>
+     * <code>optional string brand = 3;</code>
      * @return Whether the brand field is set.
      */
     public boolean hasBrand() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>optional string brand = 2;</code>
+     * <code>optional string brand = 3;</code>
      * @return The brand.
      */
     public java.lang.String getBrand() {
@@ -786,7 +874,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string brand = 2;</code>
+     * <code>optional string brand = 3;</code>
      * @return The bytes for brand.
      */
     public com.google.protobuf.ByteString
@@ -803,7 +891,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string brand = 2;</code>
+     * <code>optional string brand = 3;</code>
      * @param value The brand to set.
      * @return This builder for chaining.
      */
@@ -811,22 +899,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       brand_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>optional string brand = 2;</code>
+     * <code>optional string brand = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearBrand() {
       brand_ = getDefaultInstance().getBrand();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>optional string brand = 2;</code>
+     * <code>optional string brand = 3;</code>
      * @param value The bytes for brand to set.
      * @return This builder for chaining.
      */
@@ -834,21 +922,21 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       brand_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
     private java.lang.Object model_ = "";
     /**
-     * <code>optional string model = 3;</code>
+     * <code>optional string model = 4;</code>
      * @return Whether the model field is set.
      */
     public boolean hasModel() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
-     * <code>optional string model = 3;</code>
+     * <code>optional string model = 4;</code>
      * @return The model.
      */
     public java.lang.String getModel() {
@@ -866,7 +954,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string model = 3;</code>
+     * <code>optional string model = 4;</code>
      * @return The bytes for model.
      */
     public com.google.protobuf.ByteString
@@ -883,7 +971,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string model = 3;</code>
+     * <code>optional string model = 4;</code>
      * @param value The model to set.
      * @return This builder for chaining.
      */
@@ -891,22 +979,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       model_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>optional string model = 3;</code>
+     * <code>optional string model = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearModel() {
       model_ = getDefaultInstance().getModel();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>optional string model = 3;</code>
+     * <code>optional string model = 4;</code>
      * @param value The bytes for model to set.
      * @return This builder for chaining.
      */
@@ -914,22 +1002,22 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       model_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
 
     private int price_ ;
     /**
-     * <code>optional int32 price = 4;</code>
+     * <code>optional int32 price = 5;</code>
      * @return Whether the price field is set.
      */
     @java.lang.Override
     public boolean hasPrice() {
-      return ((bitField0_ & 0x00000008) != 0);
+      return ((bitField0_ & 0x00000010) != 0);
     }
     /**
-     * <code>optional int32 price = 4;</code>
+     * <code>optional int32 price = 5;</code>
      * @return The price.
      */
     @java.lang.Override
@@ -937,23 +1025,23 @@ private static final long serialVersionUID = 0L;
       return price_;
     }
     /**
-     * <code>optional int32 price = 4;</code>
+     * <code>optional int32 price = 5;</code>
      * @param value The price to set.
      * @return This builder for chaining.
      */
     public Builder setPrice(int value) {
 
       price_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>optional int32 price = 4;</code>
+     * <code>optional int32 price = 5;</code>
      * @return This builder for chaining.
      */
     public Builder clearPrice() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       price_ = 0;
       onChanged();
       return this;
@@ -961,15 +1049,15 @@ private static final long serialVersionUID = 0L;
 
     private int quantity_ ;
     /**
-     * <code>optional int32 quantity = 5;</code>
+     * <code>optional int32 quantity = 6;</code>
      * @return Whether the quantity field is set.
      */
     @java.lang.Override
     public boolean hasQuantity() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000020) != 0);
     }
     /**
-     * <code>optional int32 quantity = 5;</code>
+     * <code>optional int32 quantity = 6;</code>
      * @return The quantity.
      */
     @java.lang.Override
@@ -977,23 +1065,23 @@ private static final long serialVersionUID = 0L;
       return quantity_;
     }
     /**
-     * <code>optional int32 quantity = 5;</code>
+     * <code>optional int32 quantity = 6;</code>
      * @param value The quantity to set.
      * @return This builder for chaining.
      */
     public Builder setQuantity(int value) {
 
       quantity_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>optional int32 quantity = 5;</code>
+     * <code>optional int32 quantity = 6;</code>
      * @return This builder for chaining.
      */
     public Builder clearQuantity() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       quantity_ = 0;
       onChanged();
       return this;

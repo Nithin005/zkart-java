@@ -1,11 +1,10 @@
 package org.example;
 
 import java.util.List;
-import java.util.Objects;
 
 public class AdminFlow {
 
-    private Customer customer;
+    private final Customer customer;
     public static String defaultEncyptedPwd = "yzaaz";
 
     AdminFlow(Customer customer){
@@ -25,7 +24,6 @@ public class AdminFlow {
     }
 
     public boolean isAdminDefaultPwd(){
-        System.out.println(this.customer.getEncryptedPwd());
         return defaultEncyptedPwd.equals(this.customer.getEncryptedPwd());
     }
 

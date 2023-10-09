@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Main {
@@ -20,7 +19,7 @@ public class Main {
         String PWD_HISTORY_FILE = "pwdHistory.dat";
 
         DBHelper dbHelper;
-        Customer customer;
+        Customer customer = null;
 
         boolean loadFromFile = true;
 
@@ -33,10 +32,11 @@ public class Main {
         } catch (SQLException e){
             throw  new RuntimeException(e);
         }
+        Path invoiceProtoPath = Path.of(INVOICE_PROTO);
         if (loadFromFile){
             if(Utils.promptBoolean("loadFromFile is ENABLED, DB will init from text files\nall previous data will be deleted. do you want to continue (y/N): ")){
                 Utils.cleanFiles();
-                Utils.cleanFile(Path.of(INVOICE_PROTO));
+                Utils.cleanFile(invoiceProtoPath);
                 dbHelper.readFromTextFile(Path.of(CUSTOMER_DB_TEXT), Path.of(INVENTORY_DB_TEXT));
             } else {
                 System.out.println("continuing safely");
@@ -44,11 +44,13 @@ public class Main {
         }
 
         // login flow
-        customer = loginFlow(dbHelper, PWD_HISTORY_FILE);
-        if (customer == null) {
-            System.out.println("loginFlow invalid");
-            System.exit(0);
+        while(customer == null){
+            customer = loginFlow(dbHelper, PWD_HISTORY_FILE);
+            if (customer == null) {
+                System.out.println("loginFlow invalid");
+            }
         }
+
         if(customer.isAdmin()){
             AdminFlow adminFlow = new AdminFlow(customer);
             while(true){
@@ -70,7 +72,7 @@ public class Main {
                         if(pwd == null){
                             break;
                         }
-                        boolean success = changePassword(pwd, customer.getEmail(), PWD_HISTORY_FILE);
+                        boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
                         if(success){
                             Utils.updateAdminPwd(pwd);
                             customer.setPassword(pwd);
@@ -87,11 +89,11 @@ public class Main {
         } else {
             // load invoices
             List<Invoice> userInvoices = new ArrayList<>();
-            if(Files.exists(Path.of(INVOICE_PROTO))) {
-                try (InputStream is = Files.newInputStream(Path.of(INVOICE_PROTO), StandardOpenOption.CREATE)) {
+            if(Files.exists(invoiceProtoPath)) {
+                try (InputStream is = Files.newInputStream(invoiceProtoPath, StandardOpenOption.CREATE)) {
                     Invoice invoice;
                     while((invoice = Invoice.parseDelimitedFrom(is)) != null){
-                        if (invoice.getEmail().equals(customer.getEmail())){
+                        if (invoice.getCustomerId() == customer.getCustomerId()){
                             userInvoices.add(invoice);
                         }
                     }
@@ -117,7 +119,7 @@ public class Main {
                         if (invoice == null){
                             continue;
                         }
-                        Utils.saveInvoice(invoice, Path.of(INVOICE_PROTO));
+                        Utils.saveInvoice(invoice, invoiceProtoPath);
                         break;
                     case 3:
                         // view invoices
@@ -129,7 +131,7 @@ public class Main {
                         if(pwd == null){
                             break;
                         }
-                        boolean success = changePassword(pwd, customer.getEmail(), PWD_HISTORY_FILE);
+                        boolean success = changePassword(pwd, customer.getCustomerId(), PWD_HISTORY_FILE);
                         if(success){
                             dbHelper.updateCustomerPwd(customer, pwd);
                             customer.setPassword(pwd);
@@ -150,15 +152,17 @@ public class Main {
 
     public static Customer loginFlow(DBHelper dbHelper, String pwdHistoryFile){
         int choice = Utils.promptChoice(List.of("Login", "Register", "Exit"));
+        String emailId;
+        String pwd;
         switch(choice){
             case 0:
                 // login
-                String emailId = Utils.promptString("Enter username/emailId: ");
-                String pwd = Utils.promptString("Enter password: ");
+                emailId = Utils.promptString("Enter username/emailId: ");
+                pwd = Utils.promptString("Enter password: ");
 
                 if(AdminFlow.isAdminUsername(emailId)){
                     if(Utils.getAdminEncryptedPwd().equals(Utils.encryptPwd(pwd))){
-                        Customer adminUser = new Customer(0, emailId, Utils.encryptPwd(pwd), "admin", "9999999999");
+                        Customer adminUser = new Customer(-99, emailId, Utils.encryptPwd(pwd), "admin", "9999999999");
                         adminUser.setAdmin();
                         return adminUser;
                     } else {
@@ -190,7 +194,7 @@ public class Main {
                 }
                 Customer newCustomer = new Customer(0, newEmailId, "", newName, newMobile);
                 newCustomer.setPassword(pwd);
-                boolean success = changePassword(pwd, newCustomer.getEmail(), pwdHistoryFile);
+                boolean success = changePassword(pwd, newCustomer.getCustomerId(), pwdHistoryFile);
                 if(success){
                     newCustomer.setPassword(pwd);
                     int customerId = dbHelper.addCustomer(newCustomer);
@@ -207,22 +211,23 @@ public class Main {
         return null;
     }
 
-    public static boolean changePassword(String pwd, String id, String pwdHistoryFile){
+    public static boolean changePassword(String pwd, Integer customer_id, String pwdHistoryFile){
         // 1. check password strength
         if(!Utils.checkPwdStrength(pwd)) {
             System.out.println("password strength low");
         }
         // 2. check prev 3 passwords
-        Map<String, List<String>> pwdHistory = Utils.readPwdHistory(Path.of(pwdHistoryFile));
-        List<String> userPwdHistory = pwdHistory.getOrDefault(id, new ArrayList<>(List.of("", "", "")));
+        Path pwdHistoryFilePath = Path.of(pwdHistoryFile);
+        Map<Integer, List<String>> pwdHistory = Utils.readPwdHistory(pwdHistoryFilePath);
+        List<String> userPwdHistory = pwdHistory.getOrDefault(customer_id, new ArrayList<>(List.of("", "", "")));
         if(userPwdHistory.contains(pwd)){
             System.out.println("password cannot be same as previous three passwords");
             return false;
         }
         Collections.rotate(userPwdHistory, 1);
         userPwdHistory.set(0, pwd);
-        pwdHistory.put(id, userPwdHistory);
-        Utils.savePwdHistory(Path.of(pwdHistoryFile), pwdHistory);
+        pwdHistory.put(customer_id, userPwdHistory);
+        Utils.savePwdHistory(pwdHistoryFilePath, pwdHistory);
         return true;
     }
 }

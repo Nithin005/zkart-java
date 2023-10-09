@@ -7,22 +7,21 @@ option java_outer_classname = "InvoicesProtos";
 message Invoice {
   optional string invoice_no = 1;
   optional string datetime = 2;
-  optional string email = 3;
-  optional int32 total_value = 4;
-  optional int32 discounted_value = 5;
+  optional int32 customer_id = 3;
+  optional string email = 4;
+  optional int32 total_value = 5;
+  optional int32 discounted_value = 6;
 
-  repeated InvoiceItem items = 6;
+  repeated InvoiceItem items = 7;
 
 }
 
 message InvoiceItem {
-  optional string category = 1;
-  optional string brand = 2;
-  optional string model = 3;
-  optional int32 price = 4;
-  optional int32 quantity = 5;
+  optional int32 item_id = 1;
+  optional string category = 2;
+  optional string brand = 3;
+  optional string model = 4;
+  optional int32 price = 5;
+  optional int32 quantity = 6;
 }
 
-//message Invoices {
-//  repeated Invoice Invoices = 1;
-//}

@@ -42,64 +42,75 @@ public interface InvoiceOrBuilder extends
       getDatetimeBytes();
 
   /**
-   * <code>optional string email = 3;</code>
+   * <code>optional int32 customer_id = 3;</code>
+   * @return Whether the customerId field is set.
+   */
+  boolean hasCustomerId();
+  /**
+   * <code>optional int32 customer_id = 3;</code>
+   * @return The customerId.
+   */
+  int getCustomerId();
+
+  /**
+   * <code>optional string email = 4;</code>
    * @return Whether the email field is set.
    */
   boolean hasEmail();
   /**
-   * <code>optional string email = 3;</code>
+   * <code>optional string email = 4;</code>
    * @return The email.
    */
   java.lang.String getEmail();
   /**
-   * <code>optional string email = 3;</code>
+   * <code>optional string email = 4;</code>
    * @return The bytes for email.
    */
   com.google.protobuf.ByteString
       getEmailBytes();
 
   /**
-   * <code>optional int32 total_value = 4;</code>
+   * <code>optional int32 total_value = 5;</code>
    * @return Whether the totalValue field is set.
    */
   boolean hasTotalValue();
   /**
-   * <code>optional int32 total_value = 4;</code>
+   * <code>optional int32 total_value = 5;</code>
    * @return The totalValue.
    */
   int getTotalValue();
 
   /**
-   * <code>optional int32 discounted_value = 5;</code>
+   * <code>optional int32 discounted_value = 6;</code>
    * @return Whether the discountedValue field is set.
    */
   boolean hasDiscountedValue();
   /**
-   * <code>optional int32 discounted_value = 5;</code>
+   * <code>optional int32 discounted_value = 6;</code>
    * @return The discountedValue.
    */
   int getDiscountedValue();
 
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   java.util.List<org.example.protos.InvoiceItem> 
       getItemsList();
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   org.example.protos.InvoiceItem getItems(int index);
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   int getItemsCount();
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   java.util.List<? extends org.example.protos.InvoiceItemOrBuilder> 
       getItemsOrBuilderList();
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   org.example.protos.InvoiceItemOrBuilder getItemsOrBuilder(
       int index);

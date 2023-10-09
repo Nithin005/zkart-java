@@ -3,15 +3,9 @@ package org.example;
 import org.example.protos.Invoice;
 import org.example.protos.InvoiceItem;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CustomerFlow {
     private final Customer customer;
@@ -20,13 +14,13 @@ public class CustomerFlow {
         return cartItems;
     }
 
-    private List<Item> cartItems = new ArrayList<>();
+    private final List<Item> cartItems = new ArrayList<>();
 
     public List<Invoice> getInvoices() {
         return invoices;
     }
 
-    private List<Invoice> invoices = new ArrayList<>();
+    private final List<Invoice> invoices;
 
     CustomerFlow(Customer customer, List<Invoice> invoices){
         this.customer = customer;
@@ -87,7 +81,12 @@ public class CustomerFlow {
         }
         int numPurchases = invoices.size();
         Item dealOfTheMoment = getHighestStockItem(dbHelper);
-        int totalCartValue = Utils.getCartValue(cartItems, dealOfTheMoment);
+        int totalCartValue = Utils.getCartValue(cartItems);
+        int cartValueWithDiscount = Utils.getCartValueWithDiscount(cartItems, dealOfTheMoment);
+        float dealOfTheMomentDiscountPercentage = ( (float) ( totalCartValue - cartValueWithDiscount) / totalCartValue) * 100;
+        if(dealOfTheMomentDiscountPercentage>0){
+            System.out.printf("deal of the moment discount: %.2f%%\n", dealOfTheMomentDiscountPercentage);
+        }
         String userDiscountCode = dbHelper.getDiscountCode(customer);
         if(numPurchases == 4 | totalCartValue >= 20_000) {
             userDiscountCode = Utils.generateDiscountCode();
@@ -97,15 +96,18 @@ public class CustomerFlow {
         if(userDiscountCode != null){
             boolean useDiscount = Utils.promptBoolean("found discount code ("+userDiscountCode+"). do you want to use it? (y/N): ");
             if(useDiscount){
-                int discountPercent = Utils.generateDiscountValue();
-                discountedCartValue = totalCartValue * (100 - discountPercent) / 100;
-                System.out.printf("applied discount | %d -> %d (%d%% discount)\n", totalCartValue, discountedCartValue, discountPercent);
+                float discountCodePercent = Utils.generateDiscountValue();
+                System.out.printf("discount code discount: %.2f%%\n", discountCodePercent);
+                float totalDiscountPercent = discountCodePercent + dealOfTheMomentDiscountPercentage;
+                discountedCartValue = (int) (totalCartValue * (100 - totalDiscountPercent) / 100);
+                System.out.printf("applied discount | %d -> %d (%.2f%% discount)\n", totalCartValue, discountedCartValue, totalDiscountPercent);
                 dbHelper.invalidateDiscountCode(customer);
             }
         }
         String invoiceNo = Utils.generateInvoiceNumber();
         Invoice.Builder invoiceBuilder = Invoice.newBuilder().setInvoiceNo(invoiceNo)
                 .setDatetime(LocalDateTime.now().toString())
+                .setCustomerId(customer.getCustomerId())
                 .setEmail(customer.getEmail())
                 .setTotalValue(totalCartValue)
                 .setDiscountedValue(discountedCartValue);

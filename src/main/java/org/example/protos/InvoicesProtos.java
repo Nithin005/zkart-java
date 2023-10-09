@@ -33,14 +33,15 @@ public final class InvoicesProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016invoices.proto\"\212\001\n\007Invoice\022\022\n\ninvoice_" +
-      "no\030\001 \001(\t\022\020\n\010datetime\030\002 \001(\t\022\r\n\005email\030\003 \001(" +
-      "\t\022\023\n\013total_value\030\004 \001(\005\022\030\n\020discounted_val" +
-      "ue\030\005 \001(\005\022\033\n\005items\030\006 \003(\0132\014.InvoiceItem\"^\n" +
-      "\013InvoiceItem\022\020\n\010category\030\001 \001(\t\022\r\n\005brand\030" +
-      "\002 \001(\t\022\r\n\005model\030\003 \001(\t\022\r\n\005price\030\004 \001(\005\022\020\n\010q" +
-      "uantity\030\005 \001(\005B&\n\022org.example.protosB\016Inv" +
-      "oicesProtosP\001"
+      "\n\016invoices.proto\"\237\001\n\007Invoice\022\022\n\ninvoice_" +
+      "no\030\001 \001(\t\022\020\n\010datetime\030\002 \001(\t\022\023\n\013customer_i" +
+      "d\030\003 \001(\005\022\r\n\005email\030\004 \001(\t\022\023\n\013total_value\030\005 " +
+      "\001(\005\022\030\n\020discounted_value\030\006 \001(\005\022\033\n\005items\030\007" +
+      " \003(\0132\014.InvoiceItem\"o\n\013InvoiceItem\022\017\n\007ite" +
+      "m_id\030\001 \001(\005\022\020\n\010category\030\002 \001(\t\022\r\n\005brand\030\003 " +
+      "\001(\t\022\r\n\005model\030\004 \001(\t\022\r\n\005price\030\005 \001(\005\022\020\n\010qua" +
+      "ntity\030\006 \001(\005B&\n\022org.example.protosB\016Invoi" +
+      "cesProtosP\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -51,13 +52,13 @@ public final class InvoicesProtos {
     internal_static_Invoice_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Invoice_descriptor,
-        new java.lang.String[] { "InvoiceNo", "Datetime", "Email", "TotalValue", "DiscountedValue", "Items", });
+        new java.lang.String[] { "InvoiceNo", "Datetime", "CustomerId", "Email", "TotalValue", "DiscountedValue", "Items", });
     internal_static_InvoiceItem_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_InvoiceItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InvoiceItem_descriptor,
-        new java.lang.String[] { "Category", "Brand", "Model", "Price", "Quantity", });
+        new java.lang.String[] { "ItemId", "Category", "Brand", "Model", "Price", "Quantity", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

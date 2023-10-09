@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
-    private String url;
-    private Connection conn = null;
+    private final Connection conn;
 
     public DBHelper(String url) throws SQLException {
-        this.url = url;
         this.conn = DriverManager.getConnection(url);
     }
 
@@ -41,7 +39,7 @@ public class DBHelper {
                 "price INTEGER," +
                 "stock INTEGER" +
                 ");";
-        try(Statement stmt = conn.createStatement();){
+        try(Statement stmt = conn.createStatement()){
             stmt.executeUpdate("DROP TABLE IF EXISTS customer");
             stmt.executeUpdate("DROP TABLE IF EXISTS inventory");
             stmt.executeUpdate(createCustomerTableSql);
@@ -111,7 +109,7 @@ public class DBHelper {
 
     public List<Item> queryItems(String whereClause){
         List<Item> items = new ArrayList<>();
-        try(Statement stmt = conn.createStatement();){
+        try(Statement stmt = conn.createStatement()){
             String sql = "SELECT item_id, category, brand, model, price, stock FROM inventory " + whereClause;
             ResultSet res = stmt.executeQuery(sql);
             while(res.next()){
@@ -176,7 +174,7 @@ public class DBHelper {
 
 
     public void updateStock(Item item, int newStock){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE inventory SET stock = stock + ? WHERE item_id = ?");){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE inventory SET stock = stock + ? WHERE item_id = ?")){
             stmt.setInt(1, newStock);
             stmt.setInt(2, item.getItemId());
             stmt.executeUpdate();
@@ -186,7 +184,7 @@ public class DBHelper {
     }
 
     public String getDiscountCode(Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("SELECT discount_code, discount_expiry FROM customer WHERE customer_id = ?");){
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT discount_code, discount_expiry FROM customer WHERE customer_id = ?")){
             stmt.setInt(1, customer.getCustomerId());
             ResultSet res = stmt.executeQuery();
             if(res.next()){
@@ -204,7 +202,7 @@ public class DBHelper {
     }
 
     public void updateDiscountCode(Customer customer, String discountCode){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_code = ? WHERE customer_id = ?");){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_code = ? WHERE customer_id = ?")){
             stmt.setString(1, discountCode);
             stmt.setInt(2, customer.getCustomerId());
             stmt.executeUpdate();
@@ -214,7 +212,7 @@ public class DBHelper {
     }
 
     public void updateDiscountCodeExpiry(Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_expiry=discount_expiry-1 WHERE customer_id = ?");){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_expiry=discount_expiry-1 WHERE customer_id = ?")){
             stmt.setInt(1, customer.getCustomerId());
             stmt.executeUpdate();
         } catch (SQLException e){
@@ -223,7 +221,7 @@ public class DBHelper {
     }
 
     public void invalidateDiscountCode(Customer customer){
-        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_expiry=0 WHERE customer_id = ?");){
+        try(PreparedStatement stmt = conn.prepareStatement("UPDATE customer SET discount_expiry=0 WHERE customer_id = ?")){
             stmt.setInt(1, customer.getCustomerId());
             stmt.executeUpdate();
         } catch (SQLException e){

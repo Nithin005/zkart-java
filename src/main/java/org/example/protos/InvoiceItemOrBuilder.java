@@ -8,74 +8,85 @@ public interface InvoiceItemOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>optional string category = 1;</code>
+   * <code>optional int32 item_id = 1;</code>
+   * @return Whether the itemId field is set.
+   */
+  boolean hasItemId();
+  /**
+   * <code>optional int32 item_id = 1;</code>
+   * @return The itemId.
+   */
+  int getItemId();
+
+  /**
+   * <code>optional string category = 2;</code>
    * @return Whether the category field is set.
    */
   boolean hasCategory();
   /**
-   * <code>optional string category = 1;</code>
+   * <code>optional string category = 2;</code>
    * @return The category.
    */
   java.lang.String getCategory();
   /**
-   * <code>optional string category = 1;</code>
+   * <code>optional string category = 2;</code>
    * @return The bytes for category.
    */
   com.google.protobuf.ByteString
       getCategoryBytes();
 
   /**
-   * <code>optional string brand = 2;</code>
+   * <code>optional string brand = 3;</code>
    * @return Whether the brand field is set.
    */
   boolean hasBrand();
   /**
-   * <code>optional string brand = 2;</code>
+   * <code>optional string brand = 3;</code>
    * @return The brand.
    */
   java.lang.String getBrand();
   /**
-   * <code>optional string brand = 2;</code>
+   * <code>optional string brand = 3;</code>
    * @return The bytes for brand.
    */
   com.google.protobuf.ByteString
       getBrandBytes();
 
   /**
-   * <code>optional string model = 3;</code>
+   * <code>optional string model = 4;</code>
    * @return Whether the model field is set.
    */
   boolean hasModel();
   /**
-   * <code>optional string model = 3;</code>
+   * <code>optional string model = 4;</code>
    * @return The model.
    */
   java.lang.String getModel();
   /**
-   * <code>optional string model = 3;</code>
+   * <code>optional string model = 4;</code>
    * @return The bytes for model.
    */
   com.google.protobuf.ByteString
       getModelBytes();
 
   /**
-   * <code>optional int32 price = 4;</code>
+   * <code>optional int32 price = 5;</code>
    * @return Whether the price field is set.
    */
   boolean hasPrice();
   /**
-   * <code>optional int32 price = 4;</code>
+   * <code>optional int32 price = 5;</code>
    * @return The price.
    */
   int getPrice();
 
   /**
-   * <code>optional int32 quantity = 5;</code>
+   * <code>optional int32 quantity = 6;</code>
    * @return Whether the quantity field is set.
    */
   boolean hasQuantity();
   /**
-   * <code>optional int32 quantity = 5;</code>
+   * <code>optional int32 quantity = 6;</code>
    * @return The quantity.
    */
   int getQuantity();

@@ -1,14 +1,21 @@
 package org.example;
 
-import java.util.Objects;
 
-class Customer {
+public class Customer {
     private int customerId;
     private String email;
     private String encryptedPwd;
     private String name;
     private String mobile;
     private boolean isAdmin = false;
+
+    public Customer(int customerId, String email, String encryptedPwd, String name, String mobile) {
+        this.customerId = customerId;
+        this.email = email;
+        this.encryptedPwd = encryptedPwd;
+        this.name = name;
+        this.mobile = mobile;
+    }
 
     public int getCustomerId() { return customerId; }
 
@@ -28,14 +35,6 @@ class Customer {
         return mobile;
     }
 
-    public Customer(int customerId, String email, String encryptedPwd, String name, String mobile) {
-        this.customerId = customerId;
-        this.email = email;
-        this.encryptedPwd = encryptedPwd;
-        this.name = name;
-        this.mobile = mobile;
-    }
-
     public void setCustomerId(int customerId){
         this.customerId = customerId;
     }
@@ -53,7 +52,7 @@ class Customer {
     }
 
     public boolean validatePassword(String pwd) {
-        return Objects.equals(this.encryptedPwd, Utils.encryptPwd(pwd));
+        return this.encryptedPwd.equals(Utils.encryptPwd(pwd));
     }
 
     public void setEmail(String email) {

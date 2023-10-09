@@ -141,19 +141,38 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int EMAIL_FIELD_NUMBER = 3;
+  public static final int CUSTOMER_ID_FIELD_NUMBER = 3;
+  private int customerId_ = 0;
+  /**
+   * <code>optional int32 customer_id = 3;</code>
+   * @return Whether the customerId field is set.
+   */
+  @java.lang.Override
+  public boolean hasCustomerId() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional int32 customer_id = 3;</code>
+   * @return The customerId.
+   */
+  @java.lang.Override
+  public int getCustomerId() {
+    return customerId_;
+  }
+
+  public static final int EMAIL_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
   private volatile java.lang.Object email_ = "";
   /**
-   * <code>optional string email = 3;</code>
+   * <code>optional string email = 4;</code>
    * @return Whether the email field is set.
    */
   @java.lang.Override
   public boolean hasEmail() {
-    return ((bitField0_ & 0x00000004) != 0);
+    return ((bitField0_ & 0x00000008) != 0);
   }
   /**
-   * <code>optional string email = 3;</code>
+   * <code>optional string email = 4;</code>
    * @return The email.
    */
   @java.lang.Override
@@ -172,7 +191,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>optional string email = 3;</code>
+   * <code>optional string email = 4;</code>
    * @return The bytes for email.
    */
   @java.lang.Override
@@ -190,18 +209,18 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TOTAL_VALUE_FIELD_NUMBER = 4;
+  public static final int TOTAL_VALUE_FIELD_NUMBER = 5;
   private int totalValue_ = 0;
   /**
-   * <code>optional int32 total_value = 4;</code>
+   * <code>optional int32 total_value = 5;</code>
    * @return Whether the totalValue field is set.
    */
   @java.lang.Override
   public boolean hasTotalValue() {
-    return ((bitField0_ & 0x00000008) != 0);
+    return ((bitField0_ & 0x00000010) != 0);
   }
   /**
-   * <code>optional int32 total_value = 4;</code>
+   * <code>optional int32 total_value = 5;</code>
    * @return The totalValue.
    */
   @java.lang.Override
@@ -209,18 +228,18 @@ private static final long serialVersionUID = 0L;
     return totalValue_;
   }
 
-  public static final int DISCOUNTED_VALUE_FIELD_NUMBER = 5;
+  public static final int DISCOUNTED_VALUE_FIELD_NUMBER = 6;
   private int discountedValue_ = 0;
   /**
-   * <code>optional int32 discounted_value = 5;</code>
+   * <code>optional int32 discounted_value = 6;</code>
    * @return Whether the discountedValue field is set.
    */
   @java.lang.Override
   public boolean hasDiscountedValue() {
-    return ((bitField0_ & 0x00000010) != 0);
+    return ((bitField0_ & 0x00000020) != 0);
   }
   /**
-   * <code>optional int32 discounted_value = 5;</code>
+   * <code>optional int32 discounted_value = 6;</code>
    * @return The discountedValue.
    */
   @java.lang.Override
@@ -228,18 +247,18 @@ private static final long serialVersionUID = 0L;
     return discountedValue_;
   }
 
-  public static final int ITEMS_FIELD_NUMBER = 6;
+  public static final int ITEMS_FIELD_NUMBER = 7;
   @SuppressWarnings("serial")
   private java.util.List<org.example.protos.InvoiceItem> items_;
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   @java.lang.Override
   public java.util.List<org.example.protos.InvoiceItem> getItemsList() {
     return items_;
   }
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   @java.lang.Override
   public java.util.List<? extends org.example.protos.InvoiceItemOrBuilder> 
@@ -247,21 +266,21 @@ private static final long serialVersionUID = 0L;
     return items_;
   }
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   @java.lang.Override
   public int getItemsCount() {
     return items_.size();
   }
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   @java.lang.Override
   public org.example.protos.InvoiceItem getItems(int index) {
     return items_.get(index);
   }
   /**
-   * <code>repeated .InvoiceItem items = 6;</code>
+   * <code>repeated .InvoiceItem items = 7;</code>
    */
   @java.lang.Override
   public org.example.protos.InvoiceItemOrBuilder getItemsOrBuilder(
@@ -290,16 +309,19 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, datetime_);
     }
     if (((bitField0_ & 0x00000004) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
+      output.writeInt32(3, customerId_);
     }
     if (((bitField0_ & 0x00000008) != 0)) {
-      output.writeInt32(4, totalValue_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, email_);
     }
     if (((bitField0_ & 0x00000010) != 0)) {
-      output.writeInt32(5, discountedValue_);
+      output.writeInt32(5, totalValue_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      output.writeInt32(6, discountedValue_);
     }
     for (int i = 0; i < items_.size(); i++) {
-      output.writeMessage(6, items_.get(i));
+      output.writeMessage(7, items_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -317,19 +339,23 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, datetime_);
     }
     if (((bitField0_ & 0x00000004) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, customerId_);
     }
     if (((bitField0_ & 0x00000008) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, totalValue_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, email_);
     }
     if (((bitField0_ & 0x00000010) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, discountedValue_);
+        .computeInt32Size(5, totalValue_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(6, discountedValue_);
     }
     for (int i = 0; i < items_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, items_.get(i));
+        .computeMessageSize(7, items_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -355,6 +381,11 @@ private static final long serialVersionUID = 0L;
     if (hasDatetime()) {
       if (!getDatetime()
           .equals(other.getDatetime())) return false;
+    }
+    if (hasCustomerId() != other.hasCustomerId()) return false;
+    if (hasCustomerId()) {
+      if (getCustomerId()
+          != other.getCustomerId()) return false;
     }
     if (hasEmail() != other.hasEmail()) return false;
     if (hasEmail()) {
@@ -391,6 +422,10 @@ private static final long serialVersionUID = 0L;
     if (hasDatetime()) {
       hash = (37 * hash) + DATETIME_FIELD_NUMBER;
       hash = (53 * hash) + getDatetime().hashCode();
+    }
+    if (hasCustomerId()) {
+      hash = (37 * hash) + CUSTOMER_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getCustomerId();
     }
     if (hasEmail()) {
       hash = (37 * hash) + EMAIL_FIELD_NUMBER;
@@ -541,6 +576,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       invoiceNo_ = "";
       datetime_ = "";
+      customerId_ = 0;
       email_ = "";
       totalValue_ = 0;
       discountedValue_ = 0;
@@ -550,7 +586,7 @@ private static final long serialVersionUID = 0L;
         items_ = null;
         itemsBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000040);
       return this;
     }
 
@@ -585,9 +621,9 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartialRepeatedFields(org.example.protos.Invoice result) {
       if (itemsBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0)) {
+        if (((bitField0_ & 0x00000040) != 0)) {
           items_ = java.util.Collections.unmodifiableList(items_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.items_ = items_;
       } else {
@@ -607,16 +643,20 @@ private static final long serialVersionUID = 0L;
         to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.email_ = email_;
+        result.customerId_ = customerId_;
         to_bitField0_ |= 0x00000004;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.totalValue_ = totalValue_;
+        result.email_ = email_;
         to_bitField0_ |= 0x00000008;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.discountedValue_ = discountedValue_;
+        result.totalValue_ = totalValue_;
         to_bitField0_ |= 0x00000010;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.discountedValue_ = discountedValue_;
+        to_bitField0_ |= 0x00000020;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -675,9 +715,12 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
+      if (other.hasCustomerId()) {
+        setCustomerId(other.getCustomerId());
+      }
       if (other.hasEmail()) {
         email_ = other.email_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       if (other.hasTotalValue()) {
@@ -690,7 +733,7 @@ private static final long serialVersionUID = 0L;
         if (!other.items_.isEmpty()) {
           if (items_.isEmpty()) {
             items_ = other.items_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureItemsIsMutable();
             items_.addAll(other.items_);
@@ -703,7 +746,7 @@ private static final long serialVersionUID = 0L;
             itemsBuilder_.dispose();
             itemsBuilder_ = null;
             items_ = other.items_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
             itemsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getItemsFieldBuilder() : null;
@@ -748,22 +791,27 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
-            case 26: {
-              email_ = input.readBytes();
+            case 24: {
+              customerId_ = input.readInt32();
               bitField0_ |= 0x00000004;
               break;
-            } // case 26
-            case 32: {
-              totalValue_ = input.readInt32();
+            } // case 24
+            case 34: {
+              email_ = input.readBytes();
               bitField0_ |= 0x00000008;
               break;
-            } // case 32
+            } // case 34
             case 40: {
-              discountedValue_ = input.readInt32();
+              totalValue_ = input.readInt32();
               bitField0_ |= 0x00000010;
               break;
             } // case 40
-            case 50: {
+            case 48: {
+              discountedValue_ = input.readInt32();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
+            case 58: {
               org.example.protos.InvoiceItem m =
                   input.readMessage(
                       org.example.protos.InvoiceItem.PARSER,
@@ -775,7 +823,7 @@ private static final long serialVersionUID = 0L;
                 itemsBuilder_.addMessage(m);
               }
               break;
-            } // case 50
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -953,16 +1001,56 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object email_ = "";
+    private int customerId_ ;
     /**
-     * <code>optional string email = 3;</code>
-     * @return Whether the email field is set.
+     * <code>optional int32 customer_id = 3;</code>
+     * @return Whether the customerId field is set.
      */
-    public boolean hasEmail() {
+    @java.lang.Override
+    public boolean hasCustomerId() {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>optional string email = 3;</code>
+     * <code>optional int32 customer_id = 3;</code>
+     * @return The customerId.
+     */
+    @java.lang.Override
+    public int getCustomerId() {
+      return customerId_;
+    }
+    /**
+     * <code>optional int32 customer_id = 3;</code>
+     * @param value The customerId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCustomerId(int value) {
+
+      customerId_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional int32 customer_id = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCustomerId() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      customerId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object email_ = "";
+    /**
+     * <code>optional string email = 4;</code>
+     * @return Whether the email field is set.
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>optional string email = 4;</code>
      * @return The email.
      */
     public java.lang.String getEmail() {
@@ -980,7 +1068,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string email = 3;</code>
+     * <code>optional string email = 4;</code>
      * @return The bytes for email.
      */
     public com.google.protobuf.ByteString
@@ -997,7 +1085,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string email = 3;</code>
+     * <code>optional string email = 4;</code>
      * @param value The email to set.
      * @return This builder for chaining.
      */
@@ -1005,22 +1093,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       email_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>optional string email = 3;</code>
+     * <code>optional string email = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearEmail() {
       email_ = getDefaultInstance().getEmail();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>optional string email = 3;</code>
+     * <code>optional string email = 4;</code>
      * @param value The bytes for email to set.
      * @return This builder for chaining.
      */
@@ -1028,22 +1116,22 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       email_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
 
     private int totalValue_ ;
     /**
-     * <code>optional int32 total_value = 4;</code>
+     * <code>optional int32 total_value = 5;</code>
      * @return Whether the totalValue field is set.
      */
     @java.lang.Override
     public boolean hasTotalValue() {
-      return ((bitField0_ & 0x00000008) != 0);
+      return ((bitField0_ & 0x00000010) != 0);
     }
     /**
-     * <code>optional int32 total_value = 4;</code>
+     * <code>optional int32 total_value = 5;</code>
      * @return The totalValue.
      */
     @java.lang.Override
@@ -1051,23 +1139,23 @@ private static final long serialVersionUID = 0L;
       return totalValue_;
     }
     /**
-     * <code>optional int32 total_value = 4;</code>
+     * <code>optional int32 total_value = 5;</code>
      * @param value The totalValue to set.
      * @return This builder for chaining.
      */
     public Builder setTotalValue(int value) {
 
       totalValue_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>optional int32 total_value = 4;</code>
+     * <code>optional int32 total_value = 5;</code>
      * @return This builder for chaining.
      */
     public Builder clearTotalValue() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       totalValue_ = 0;
       onChanged();
       return this;
@@ -1075,15 +1163,15 @@ private static final long serialVersionUID = 0L;
 
     private int discountedValue_ ;
     /**
-     * <code>optional int32 discounted_value = 5;</code>
+     * <code>optional int32 discounted_value = 6;</code>
      * @return Whether the discountedValue field is set.
      */
     @java.lang.Override
     public boolean hasDiscountedValue() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000020) != 0);
     }
     /**
-     * <code>optional int32 discounted_value = 5;</code>
+     * <code>optional int32 discounted_value = 6;</code>
      * @return The discountedValue.
      */
     @java.lang.Override
@@ -1091,23 +1179,23 @@ private static final long serialVersionUID = 0L;
       return discountedValue_;
     }
     /**
-     * <code>optional int32 discounted_value = 5;</code>
+     * <code>optional int32 discounted_value = 6;</code>
      * @param value The discountedValue to set.
      * @return This builder for chaining.
      */
     public Builder setDiscountedValue(int value) {
 
       discountedValue_ = value;
-      bitField0_ |= 0x00000010;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
-     * <code>optional int32 discounted_value = 5;</code>
+     * <code>optional int32 discounted_value = 6;</code>
      * @return This builder for chaining.
      */
     public Builder clearDiscountedValue() {
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000020);
       discountedValue_ = 0;
       onChanged();
       return this;
@@ -1116,9 +1204,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<org.example.protos.InvoiceItem> items_ =
       java.util.Collections.emptyList();
     private void ensureItemsIsMutable() {
-      if (!((bitField0_ & 0x00000020) != 0)) {
+      if (!((bitField0_ & 0x00000040) != 0)) {
         items_ = new java.util.ArrayList<org.example.protos.InvoiceItem>(items_);
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
        }
     }
 
@@ -1126,7 +1214,7 @@ private static final long serialVersionUID = 0L;
         org.example.protos.InvoiceItem, org.example.protos.InvoiceItem.Builder, org.example.protos.InvoiceItemOrBuilder> itemsBuilder_;
 
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public java.util.List<org.example.protos.InvoiceItem> getItemsList() {
       if (itemsBuilder_ == null) {
@@ -1136,7 +1224,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public int getItemsCount() {
       if (itemsBuilder_ == null) {
@@ -1146,7 +1234,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public org.example.protos.InvoiceItem getItems(int index) {
       if (itemsBuilder_ == null) {
@@ -1156,7 +1244,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder setItems(
         int index, org.example.protos.InvoiceItem value) {
@@ -1173,7 +1261,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder setItems(
         int index, org.example.protos.InvoiceItem.Builder builderForValue) {
@@ -1187,7 +1275,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder addItems(org.example.protos.InvoiceItem value) {
       if (itemsBuilder_ == null) {
@@ -1203,7 +1291,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder addItems(
         int index, org.example.protos.InvoiceItem value) {
@@ -1220,7 +1308,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder addItems(
         org.example.protos.InvoiceItem.Builder builderForValue) {
@@ -1234,7 +1322,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder addItems(
         int index, org.example.protos.InvoiceItem.Builder builderForValue) {
@@ -1248,7 +1336,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder addAllItems(
         java.lang.Iterable<? extends org.example.protos.InvoiceItem> values) {
@@ -1263,12 +1351,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder clearItems() {
       if (itemsBuilder_ == null) {
         items_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
       } else {
         itemsBuilder_.clear();
@@ -1276,7 +1364,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public Builder removeItems(int index) {
       if (itemsBuilder_ == null) {
@@ -1289,14 +1377,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public org.example.protos.InvoiceItem.Builder getItemsBuilder(
         int index) {
       return getItemsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public org.example.protos.InvoiceItemOrBuilder getItemsOrBuilder(
         int index) {
@@ -1306,7 +1394,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public java.util.List<? extends org.example.protos.InvoiceItemOrBuilder> 
          getItemsOrBuilderList() {
@@ -1317,14 +1405,14 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public org.example.protos.InvoiceItem.Builder addItemsBuilder() {
       return getItemsFieldBuilder().addBuilder(
           org.example.protos.InvoiceItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public org.example.protos.InvoiceItem.Builder addItemsBuilder(
         int index) {
@@ -1332,7 +1420,7 @@ private static final long serialVersionUID = 0L;
           index, org.example.protos.InvoiceItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .InvoiceItem items = 6;</code>
+     * <code>repeated .InvoiceItem items = 7;</code>
      */
     public java.util.List<org.example.protos.InvoiceItem.Builder> 
          getItemsBuilderList() {
@@ -1345,7 +1433,7 @@ private static final long serialVersionUID = 0L;
         itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             org.example.protos.InvoiceItem, org.example.protos.InvoiceItem.Builder, org.example.protos.InvoiceItemOrBuilder>(
                 items_,
-                ((bitField0_ & 0x00000020) != 0),
+                ((bitField0_ & 0x00000040) != 0),
                 getParentForChildren(),
                 isClean());
         items_ = null;

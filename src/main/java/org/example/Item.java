@@ -2,22 +2,13 @@ package org.example;
 
 import org.example.protos.InvoiceItem;
 
-class Item {
-    private int itemId;
-    private String category;
-    private String brand;
-    private String model;
+public class Item {
+    private final int itemId;
+    private final String category;
+    private final String brand;
+    private final String model;
     private int price;
     private int stock;
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     private int quantity = 1;
 
     public Item(int itemId, String category, String brand, String model, int price, int stock) {
@@ -29,23 +20,10 @@ class Item {
         this.stock = stock;
     }
 
-    public void addStock(int num) {
-        this.stock += num;
-    }
+    public int getItemId() {
+        return itemId;
 
-    public void removeStock(int num) {
-        this.stock -= num;
     }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public int getItemId() { return itemId; }
     public String getCategory() {
         return category;
     }
@@ -66,12 +44,25 @@ class Item {
         return stock;
     }
 
-    public String getItemKey() {
-        return this.brand + "-" + this.model;
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public InvoiceItem toInvoiceItem(){
         return InvoiceItem.newBuilder().setCategory(this.category)
+                .setItemId(this.itemId)
                 .setBrand(this.brand)
                 .setModel(this.model)
                 .setPrice(this.price)
