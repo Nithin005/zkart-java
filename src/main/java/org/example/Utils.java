@@ -107,7 +107,7 @@ public class Utils {
     }
 
     public static String promptMobileNo(String prompt){
-        String regexPattern = "/^\\+?[1-9][0-9]{7,14}$/";
+        String regexPattern = "^\\+?[1-9][0-9]{7,14}$";
         while(true){
             String testPhoneNo = promptString(prompt);
             if(patternMatches(testPhoneNo, regexPattern)){
