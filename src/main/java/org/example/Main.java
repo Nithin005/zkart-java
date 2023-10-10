@@ -96,21 +96,8 @@ public class Main {
                 }
             } else {
                 // load invoices
-                List<Invoice> userInvoices = new ArrayList<>();
-                if(Files.exists(invoiceProtoPath)) {
-                    try (InputStream is = Files.newInputStream(invoiceProtoPath, StandardOpenOption.CREATE)) {
-                        Invoices invoices = Invoices.parseFrom(is);
-                        for(Invoice invoice: invoices.getInvoicesList()){
-                            if(invoice.getCustomerId() == customer.getCustomerId()){
-                                userInvoices.add(invoice);
-                            }
-                        }
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                List<Invoice> userInvoices = Utils.readInvoices(customer, invoiceProtoPath);
                 CustomerFlow customerFlow = new CustomerFlow(customer, userInvoices);
-
                 inner_customer:
                 while (true) {
                     // deal of the moment
