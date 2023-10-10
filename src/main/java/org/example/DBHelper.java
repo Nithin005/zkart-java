@@ -15,9 +15,13 @@ public class DBHelper {
         this.conn = DriverManager.getConnection(url);
     }
 
-    public void close() throws SQLException {
-        if (conn != null){
-            conn.close();
+    public void close() {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 

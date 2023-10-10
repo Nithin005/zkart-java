@@ -220,7 +220,7 @@ public class Main {
             case 1:
                 // register
                 String newEmailId = Utils.promptEmail("Enter username/emailId: ");
-                String newName = Utils.promptString("Enter name: ");
+                String newName = Utils.promptStringLine("Enter name: ");
                 String newMobile = Utils.promptMobileNo("Enter mobileNo: ");
                 Customer newCustomer = new Customer(0, newEmailId, "", newName, newMobile);
                 boolean success = false;
@@ -238,6 +238,7 @@ public class Main {
                 System.out.println("new account created");
                 return newCustomer;
             case 2:
+                dbHelper.close();
                 System.exit(0);
         }
         return null;

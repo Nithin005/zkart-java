@@ -72,7 +72,7 @@ public class Utils {
         Scanner in = new Scanner(System.in);
         in.useDelimiter("\n");
         while (true) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             try {
                 return in.nextLine();
             } catch (InputMismatchException e) {
