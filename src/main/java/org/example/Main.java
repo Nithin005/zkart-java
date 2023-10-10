@@ -1,12 +1,9 @@
 package org.example;
 
 import org.example.protos.Invoice;
-import org.example.protos.Invoices;
+import org.example.protos.InvoiceItem;
 
-import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -103,7 +100,7 @@ public class Main {
                     // deal of the moment
                     System.out.println("/".repeat(10)+" DEAL OF THE MOMENT (10% discount) "+"/".repeat(10));
                     Utils.printItems(List.of(customerFlow.getDealOfTheMomentItem(dbHelper)));
-                    int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "view invoices range", "Exit"));
+                    int choice = Utils.promptChoice(List.of("Shop", "View Cart", "Checkout", "View invoices", "Change password", "view invoices range", "search invoices", "Exit"));
                     switch (choice){
                         case 0:
                             // shop
@@ -173,6 +170,22 @@ public class Main {
                             }
                             break;
                         case 6:
+                            // search invoices
+                            DateTimeFormatter _formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            String query = Utils.promptStringLine("Enter search query: ").toLowerCase();
+                            System.out.printf("%10s %25s %5s %10s %10s %10s %10s %10s\n", "invoiceNo", "datetime", "itemId", "Category", "Brand", "Model", "Price", "Quantity");
+                            for(Invoice inv: customerFlow.getInvoices()){
+                                for(InvoiceItem it: inv.getItemsList()){
+                                    if(it.getCategory().toLowerCase().contains(query) ||
+                                    it.getBrand().toLowerCase().contains(query) ||
+                                    it.getModel().toLowerCase().contains(query)){
+                                        System.out.printf("%10s %25s %5d %10s %10s %10s %10s %10s\n", inv.getInvoiceNo(), _formatter.format(LocalDateTime.parse(inv.getDatetime())), it.getItemId(), it.getCategory(), it.getBrand(), it.getModel(), it.getPrice(), it.getQuantity());
+                                    }
+                                }
+                            }
+                            System.out.println("-".repeat(60));
+                            break;
+                        case 7:
                             // exit
                             break inner_customer;
                     }

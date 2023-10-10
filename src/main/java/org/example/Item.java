@@ -69,4 +69,10 @@ public class Item {
                 .setQuantity(this.quantity)
                 .build();
     }
+
+    public static Item fromInvoiceItem(InvoiceItem invoiceItem){
+        Item item = new Item(invoiceItem.getItemId(), invoiceItem.getCategory(), invoiceItem.getBrand(), invoiceItem.getModel(), invoiceItem.getPrice(), 0);
+        item.setQuantity(invoiceItem.getQuantity());
+        return item;
+    }
 }
